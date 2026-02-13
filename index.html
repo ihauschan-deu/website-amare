@@ -4,83 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Амаре Групп</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="header">
-    <div class="container header-inner">
-        <div class="logo">АМАРЕ ГРУПП</div>
-
+<!-- HERO -->
+<section class="hero" id="hero">
+    <div class="container">
         <nav class="nav">
-            <a href="#about">О нас</a>
-            <a href="#products">Каталог</a>
-            <a href="#contact">Контакты</a>
+            <a href="#products" class="nav-link">Католог</a>
+            <a href="#contact" class="nav-link">Контакты</a>
         </nav>
 
-        <button class="burger" id="burger">☰</button>
-    </div>
-</header>
+        <div class="hero-content">
+            <div class="hero-image">
+                <img src="https://www.figma.com/api/mcp/asset/4eadad9e-6d17-4879-b686-cef1942221da" alt="Hero Background">
+                <div class="hero-overlay"></div>
+                
+                <h1 class="brand-title">АМАРЕ<br>ГРУПП</h1>
+            </div>
 
-<!-- HERO -->
-<section class="hero">
-    <div class="container hero-inner">
-        <div class="hero-text">
-            <h1>Наша цель — сделать жизнь слаще!</h1>
+            <div class="hero-bottom">
+                <div class="hero-mission">
+                    <p>Наша цель -</p>
+                    <p>сделать жизнь слаще!</p>
+                </div>
+
+                <div class="hero-features">
+                    <h2>Новинки</h2>
+                    <a href="#products" class="feature-box"></a>
+                    <a href="#products" class="feature-box"></a>
+                    <a href="#contact" class="feature-box"></a>
+                </div>
+            </div>
         </div>
-
-        <div class="hero-features">
-            <h2>Новинки</h2>
-            <div class="feature"></div>
-            <div class="feature"></div>
-            <div class="feature"></div>
-        </div>
-    </div>
-</section>
-
-<!-- ABOUT -->
-<section class="about" id="about">
-    <div class="container">
-        <h2>О нас</h2>
-        <p>
-            Мы производим качественные кондитерские ингредиенты.
-            Наша миссия — создавать продукты, которые делают жизнь слаще.
-        </p>
     </div>
 </section>
 
 <!-- PRODUCTS -->
 <section class="products" id="products">
     <div class="container">
-        <h2>Товары</h2>
+        <div class="section-title">
+            <h2>ТОВАРЫ</h2>
+        </div>
 
-        <div class="product-grid" id="productGrid">
-            <!-- Карточки будут подтягиваться из backend -->
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://www.figma.com/api/mcp/asset/ccc5bb50-fb58-4ef9-9641-f1d3ab9ff910" alt="Гречневые шарики">
+                </div>
+                <h3 class="product-name">Глазурь на эквиваленте "Святая"</h3>
+                <a href="#" class="product-link">Узнать больше!</a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://www.figma.com/api/mcp/asset/ccc5bb50-fb58-4ef9-9641-f1d3ab9ff910" alt="Гречневые шарики">
+                </div>
+                <h3 class="product-name">Глазурь на эквиваленте "Святая"</h3>
+                <a href="#" class="product-link">Узнать больше!</a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://www.figma.com/api/mcp/asset/ccc5bb50-fb58-4ef9-9641-f1d3ab9ff910" alt="Гречневые шарики">
+                </div>
+                <h3 class="product-name">Глазурь на эквиваленте "Святая"</h3>
+                <a href="#" class="product-link">Узнать больше!</a>
+            </div>
         </div>
     </div>
 </section>
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
-    <div class="container contact-inner">
-        <div class="contact-left">
-            <h2>Напишите нам</h2>
+    <div class="container">
+        <div class="contact-grid">
+            <div class="contact-form">
+                <h2>Напишите нам</h2>
+                <form id="contactForm">
+                    <textarea name="message" placeholder="Место для сообщения" rows="5"></textarea>
+                    <button type="submit">Отправить</button>
+                </form>
+            </div>
 
-            <form id="contactForm">
-                <textarea name="message" placeholder="Ваше сообщение"></textarea>
-                <button type="submit">Отправить</button>
-            </form>
-        </div>
-
-        <div class="contact-right">
-            <h2>Свяжитесь с нами</h2>
-            <p>Адрес: г. Москва ...</p>
-            <p>Телефон: +7 903 450-64-78</p>
-            <p>Email: info@amare.ru</p>
+            <div class="contact-info">
+                <h2>Или свяжитесь с нами по другому!</h2>
+                <div class="contact-details">
+                    <p><strong>Адрес:</strong><br>текстекстекстеквстетвстекстекст</p>
+                    <p><strong>Телефон:</strong><br>+7(903)450-64-78<br>+7(903)450-64-78</p>
+                    <p><strong>Почта:</strong><br>deuywu2h@mdik.com</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<script src="js/main.js"></script>
+<script src="main.js"></script>
 </body>
 </html>
