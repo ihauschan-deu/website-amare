@@ -240,6 +240,8 @@ img {
 
 .product-grid-wrapper {
     position: relative;
+    width: 100%;
+    overflow: hidden;
 }
 
 .product-grid {
@@ -249,7 +251,7 @@ img {
     overflow-x: auto;
     scroll-behavior: smooth;
     padding-bottom: 20px;
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none; 
 }
 
 .product-grid::-webkit-scrollbar {
