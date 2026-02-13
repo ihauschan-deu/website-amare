@@ -13,6 +13,32 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Horizontal scroll for products
+const scrollButton = document.getElementById('scrollRight');
+const productGrid = document.getElementById('productGrid');
+
+if (scrollButton && productGrid) {
+    scrollButton.addEventListener('click', function() {
+        const scrollAmount = 420; // card width + gap
+        productGrid.scrollBy({
+            left: scrollAmount,
+            behavior: 'smooth'
+        });
+    });
+    
+    // Hide button when at end
+    productGrid.addEventListener('scroll', function() {
+        const maxScroll = productGrid.scrollWidth - productGrid.clientWidth;
+        if (productGrid.scrollLeft >= maxScroll - 10) {
+            scrollButton.style.opacity = '0.3';
+            scrollButton.style.cursor = 'default';
+        } else {
+            scrollButton.style.opacity = '1';
+            scrollButton.style.cursor = 'pointer';
+        }
+    });
+}
+
 // Contact form handling
 const contactForm = document.getElementById('contactForm');
 
