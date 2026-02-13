@@ -4,501 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Амаре Групп</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Kyiv Type Serif', serif;
-            background-color: #4b2e14;
-            color: #4b2e14;
-        }
-
-        .container {
-            background-color: #4b2e14;
-            position: relative;
-            width: 100%;
-        }
-
-        /* Desktop - 1 (Hero Section) */
-        .hero-section {
-            background-color: #4b2e14;
-            height: 1024px;
-            position: relative;
-            overflow: hidden;
-            margin-bottom: -18px;
-        }
-
-        .hero-content {
-            position: relative;
-            height: 3683px;
-        }
-
-        .hero-bg {
-            position: absolute;
-            background-color: #d8d5c6;
-            height: 948px;
-            left: 40px;
-            border-radius: 30px;
-            top: 51px;
-            width: calc(100% - 80px);
-            max-width: 1360px;
-        }
-
-        .hero-image {
-            position: absolute;
-            height: 503px;
-            left: 80px;
-            top: 76px;
-            width: calc(100% - 160px);
-            max-width: 1280px;
-            border-radius: 30px;
-            overflow: hidden;
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            height: 503px;
-            left: 80px;
-            top: 76px;
-            width: calc(100% - 160px);
-            max-width: 1280px;
-            opacity: 0.3;
-        }
-
-        .hero-overlay img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .header-nav {
-            position: absolute;
-            background-color: #d8d5c6;
-            height: 52px;
-            left: 112px;
-            border-radius: 30px;
-            top: 102px;
-            width: 303px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 60px;
-        }
-
-        .nav-link {
-            font-size: 20px;
-            color: black;
-            text-decoration: none;
-            letter-spacing: 1px;
-            font-weight: 350;
-        }
-
-        .brand-title {
-            position: absolute;
-            font-weight: 350;
-            font-size: 48px;
-            left: 1080px;
-            top: 424px;
-            letter-spacing: 2.4px;
-            width: 212px;
-            line-height: normal;
-            color: #4b2e14;
-        }
-
-        .mission-text {
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            font-weight: 350;
-            font-size: 36px;
-            left: 80px;
-            color: #4b2e14;
-            text-align: center;
-            top: 685px;
-            letter-spacing: 1.8px;
-            width: 443px;
-            line-height: normal;
-        }
-
-        .section-title {
-            position: absolute;
-            font-weight: 350;
-            font-size: 36px;
-            left: 945px;
-            color: #4b2e14;
-            text-align: center;
-            top: 624px;
-            letter-spacing: 1.8px;
-        }
-
-        .feature-box {
-            position: absolute;
-            background-color: #a2adcb;
-            height: 64px;
-            border-radius: 30px;
-            width: 387px;
-        }
-
-        .feature-box-1 {
-            left: 973px;
-            top: 683px;
-            border: 5px solid #a2adcb;
-        }
-
-        .feature-box-2 {
-            left: 973px;
-            top: 759px;
-        }
-
-        .feature-box-3 {
-            left: 973px;
-            top: 835px;
-        }
-
-        /* Desktop - 3 (Products Section) */
-        .products-section {
-            background-color: #4b2e14;
-            height: 1024px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .products-bg {
-            position: absolute;
-            background-color: #d8d5c6;
-            height: 915px;
-            left: 40px;
-            border-radius: 30px;
-            top: 65px;
-            width: calc(100% - 80px);
-            max-width: 1360px;
-        }
-
-        .products-title-bg {
-            position: absolute;
-            height: 81px;
-            left: 80px;
-            top: 110px;
-            width: 630px;
-        }
-
-        .products-title-bg img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .products-title {
-            position: absolute;
-            font-weight: 350;
-            font-size: 36px;
-            left: 110px;
-            color: #4b2e14;
-            top: 132px;
-            letter-spacing: 1.8px;
-            line-height: normal;
-        }
-
-        .product-grid {
-            position: absolute;
-            top: 252px;
-            left: 80px;
-            right: 80px;
-            display: flex;
-            gap: 46px;
-        }
-
-        .product-card {
-            background-color: #a2adcb;
-            height: 564px;
-            border-radius: 30px;
-            flex: 1;
-            position: relative;
-        }
-
-        .product-image {
-            width: 326px;
-            height: 244px;
-            border-radius: 30px;
-            overflow: hidden;
-            margin: 28px auto 0;
-        }
-
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .product-name {
-            font-weight: 350;
-            font-size: 36px;
-            color: black;
-            letter-spacing: 1.8px;
-            line-height: normal;
-            margin: 47px 23px 0;
-            height: 128px;
-        }
-
-        .product-link {
-            font-weight: 200;
-            font-size: 24px;
-            color: black;
-            letter-spacing: 1.2px;
-            line-height: normal;
-            text-align: center;
-            margin-top: 34px;
-            text-decoration: none;
-            display: block;
-        }
-
-        /* Desktop - 5 (Contact Section) */
-        .contact-section {
-            background-color: #4b2e14;
-            height: 692px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-bg {
-            position: absolute;
-            background-color: #d8d5c6;
-            height: 408px;
-            left: 41px;
-            border-radius: 30px;
-            top: 109px;
-            width: 862px;
-        }
-
-        .contact-title {
-            position: absolute;
-            font-weight: 500;
-            font-size: 36px;
-            left: 80px;
-            color: #a2adcb;
-            text-align: center;
-            top: 29px;
-        }
-
-        .message-area {
-            position: absolute;
-            font-weight: 100;
-            font-size: 36px;
-            left: 70px;
-            color: black;
-            top: 148px;
-            width: 534px;
-            height: 79px;
-            line-height: normal;
-        }
-
-        .submit-button {
-            position: absolute;
-            border: 3px solid #b39b7b;
-            height: 67px;
-            left: 450px;
-            border-radius: 30px;
-            top: 544px;
-            width: 246px;
-            background: transparent;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .submit-button-text {
-            font-weight: 350;
-            font-size: 36px;
-            color: #d8d5c6;
-            letter-spacing: 1.8px;
-        }
-
-        .contact-info-title {
-            position: absolute;
-            font-weight: 500;
-            font-size: 36px;
-            left: 985px;
-            color: #a2adcb;
-            top: 36px;
-            width: 391px;
-            line-height: normal;
-        }
-
-        .contact-address {
-            position: absolute;
-            font-family: 'Kyiv Type Serif', serif;
-            font-weight: 60;
-            font-size: 36px;
-            left: 985px;
-            color: white;
-            top: 162px;
-            width: 343px;
-            line-height: normal;
-        }
-
-        .contact-phone {
-            position: absolute;
-            font-family: 'Kyiv Type Serif', serif;
-            font-weight: 60;
-            font-size: 36px;
-            left: 985px;
-            color: white;
-            top: 322px;
-            width: 343px;
-            line-height: normal;
-        }
-
-        .contact-email {
-            position: absolute;
-            font-weight: 100;
-            font-size: 36px;
-            left: 980px;
-            color: white;
-            top: 492px;
-            width: 400px;
-            line-height: normal;
-        }
-
-        .scroll-button {
-            position: absolute;
-            left: 1280px;
-            width: 80px;
-            height: 80px;
-            top: 1871px;
-        }
-
-        .scroll-button img {
-            width: 100%;
-            height: 100%;
-        }
-
-        .scroll-arrow {
-            position: absolute;
-            left: 1300px;
-            top: 1911px;
-            width: 40px;
-        }
-
-        .scroll-arrow img {
-            width: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Hero Section (Desktop - 1) -->
-        <div class="hero-section">
-            <div class="hero-content">
-                <div class="hero-bg"></div>
-                
-                <div class="hero-image">
-                    <img src="https://www.figma.com/api/mcp/asset/4eadad9e-6d17-4879-b686-cef1942221da" alt="Hero Background">
-                </div>
-                
-                <div class="hero-overlay">
-                    <img src="https://www.figma.com/api/mcp/asset/bda72889-89a9-441f-9415-c17db2cbf6a3" alt="Overlay">
-                </div>
-                
-                <div class="header-nav">
-                    <a href="#products" class="nav-link">Католог</a>
-                    <a href="#contact" class="nav-link">Контакты</a>
-                </div>
-                
-                <p class="brand-title">АМАРЕ ГРУПП</p>
-                
-                <div class="mission-text">
-                    <p>Наша цель -</p>
-                    <p>сделать жизнь слаще!</p>
-                </div>
-                
-                <p class="section-title">Новинки</p>
-                
-                <div class="feature-box feature-box-1"></div>
-                <div class="feature-box feature-box-2"></div>
-                <div class="feature-box feature-box-3"></div>
-            </div>
+
+<header class="header">
+    <div class="container header-inner">
+        <div class="logo">АМАРЕ ГРУПП</div>
+
+        <nav class="nav">
+            <a href="#about">О нас</a>
+            <a href="#products">Каталог</a>
+            <a href="#contact">Контакты</a>
+        </nav>
+
+        <button class="burger" id="burger">☰</button>
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container hero-inner">
+        <div class="hero-text">
+            <h1>Наша цель — сделать жизнь слаще!</h1>
         </div>
 
-        <!-- Products Section (Desktop - 3) -->
-        <div class="products-section" id="products">
-            <div class="products-bg"></div>
-            
-            <div class="products-title-bg">
-                <img src="https://www.figma.com/api/mcp/asset/b21d8da5-48ef-45cd-bf0f-f45778b9a6ac" alt="Products Title Background">
-            </div>
-            
-            <p class="products-title">ТОВАРЫ</p>
-            
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://www.figma.com/api/mcp/asset/ccc5bb50-fb58-4ef9-9641-f1d3ab9ff910" alt="Product">
-                    </div>
-                    <p class="product-name">Глазурь на эквиваленте "Святая"</p>
-                    <a href="#" class="product-link">Узнать больше!</a>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://www.figma.com/api/mcp/asset/ccc5bb50-fb58-4ef9-9641-f1d3ab9ff910" alt="Product">
-                    </div>
-                    <p class="product-name">Глазурь на эквиваленте "Святая"</p>
-                    <a href="#" class="product-link">Узнать больше!</a>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://www.figma.com/api/mcp/asset/ccc5bb50-fb58-4ef9-9641-f1d3ab9ff910" alt="Product">
-                    </div>
-                    <p class="product-name">Глазурь на эквиваленте "Святая"</p>
-                    <a href="#" class="product-link">Узнать больше!</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Contact Section (Desktop - 5) -->
-        <div class="contact-section" id="contact">
-            <div class="contact-bg"></div>
-            
-            <p class="contact-title">Напишите нам</p>
-            
-            <div class="message-area">Место для сообщения</div>
-            
-            <button class="submit-button">
-                <span class="submit-button-text">Отправить</span>
-            </button>
-            
-            <p class="contact-info-title">Или свяжитесь с нами по другому!</p>
-            
-            <p class="contact-address">Адрес: текстекстекстеквстетвстекстекст</p>
-            
-            <div class="contact-phone">
-                <p>Телефон: +7(903)450-64-78</p>
-                <p>+7(903)450-64-78</p>
-            </div>
-            
-            <p class="contact-email">Почта: deuywu2h@mdik.com</p>
-        </div>
-
-        <!-- Scroll Button -->
-        <div class="scroll-button">
-            <img src="https://www.figma.com/api/mcp/asset/ef9dc42c-00b0-415e-912d-6f68fe2cd573" alt="Scroll">
-        </div>
-        
-        <div class="scroll-arrow">
-            <img src="https://www.figma.com/api/mcp/asset/05da8af9-cb9a-4226-a713-d9b314c7bd48" alt="Arrow">
+        <div class="hero-features">
+            <h2>Новинки</h2>
+            <div class="feature"></div>
+            <div class="feature"></div>
+            <div class="feature"></div>
         </div>
     </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+    <div class="container">
+        <h2>О нас</h2>
+        <p>
+            Мы производим качественные кондитерские ингредиенты.
+            Наша миссия — создавать продукты, которые делают жизнь слаще.
+        </p>
+    </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+    <div class="container">
+        <h2>Товары</h2>
+
+        <div class="product-grid" id="productGrid">
+            <!-- Карточки будут подтягиваться из backend -->
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+    <div class="container contact-inner">
+        <div class="contact-left">
+            <h2>Напишите нам</h2>
+
+            <form id="contactForm">
+                <textarea name="message" placeholder="Ваше сообщение"></textarea>
+                <button type="submit">Отправить</button>
+            </form>
+        </div>
+
+        <div class="contact-right">
+            <h2>Свяжитесь с нами</h2>
+            <p>Адрес: г. Москва ...</p>
+            <p>Телефон: +7 903 450-64-78</p>
+            <p>Email: info@amare.ru</p>
+        </div>
+    </div>
+</section>
+
+<script src="js/main.js"></script>
 </body>
 </html>
