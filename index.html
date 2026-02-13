@@ -59,30 +59,38 @@
             <h2>ТОВАРЫ</h2>
         </div>
 
-        <div class="product-grid">
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="https://www.figma.com/api/mcp/asset/ccc5bb50-fb58-4ef9-9641-f1d3ab9ff910" alt="Гречневые шарики">
+        <div class="product-grid-wrapper">
+            <div class="product-grid" id="productGrid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://www.figma.com/api/mcp/asset/ccc5bb50-fb58-4ef9-9641-f1d3ab9ff910" alt="Гречневые шарики">
+                    </div>
+                    <h3 class="product-name">Глазурь на эквиваленте "Святая"</h3>
+                    <a href="#" class="product-link">Узнать больше!</a>
                 </div>
-                <h3 class="product-name">Глазурь на эквиваленте "Святая"</h3>
-                <a href="#" class="product-link">Узнать больше!</a>
-            </div>
 
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="https://www.figma.com/api/mcp/asset/ccc5bb50-fb58-4ef9-9641-f1d3ab9ff910" alt="Гречневые шарики">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://www.figma.com/api/mcp/asset/ccc5bb50-fb58-4ef9-9641-f1d3ab9ff910" alt="Гречневые шарики">
+                    </div>
+                    <h3 class="product-name">Глазурь на эквиваленте "Святая"</h3>
+                    <a href="#" class="product-link">Узнать больше!</a>
                 </div>
-                <h3 class="product-name">Глазурь на эквиваленте "Святая"</h3>
-                <a href="#" class="product-link">Узнать больше!</a>
-            </div>
 
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="https://www.figma.com/api/mcp/asset/ccc5bb50-fb58-4ef9-9641-f1d3ab9ff910" alt="Гречневые шарики">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://www.figma.com/api/mcp/asset/ccc5bb50-fb58-4ef9-9641-f1d3ab9ff910" alt="Гречневые шарики">
+                    </div>
+                    <h3 class="product-name">Глазурь на эквиваленте "Святая"</h3>
+                    <a href="#" class="product-link">Узнать больше!</a>
                 </div>
-                <h3 class="product-name">Глазурь на эквиваленте "Святая"</h3>
-                <a href="#" class="product-link">Узнать больше!</a>
             </div>
+            
+            <button class="scroll-arrow" id="scrollRight" aria-label="Scroll right">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                    <path d="M15 10 L25 20 L15 30" stroke="#4b2e14" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
         </div>
     </div>
 </section>
@@ -90,9 +98,13 @@
 <!-- CONTACT -->
 <section class="contact" id="contact">
     <div class="container">
+        <div class="contact-titles">
+            <h2>Напишите нам</h2>
+            <h2>Или свяжитесь с нами по другому!</h2>
+        </div>
+        
         <div class="contact-grid">
             <div class="contact-form">
-                <h2>Напишите нам</h2>
                 <form id="contactForm">
                     <textarea name="message" placeholder="Место для сообщения" rows="5"></textarea>
                     <button type="submit">Отправить</button>
@@ -100,8 +112,16 @@
             </div>
 
             <div class="contact-info">
-                <h2>Или свяжитесь с нами по другому!</h2>
                 <div class="contact-details">
-                    <p><strong>Адрес:</strong><br>текстекстекстеквстетвстекстекст</p>
-                    <p><strong>Телефон:</strong><br>+7(903)450-64-78<br>+7(903)450-64-78</p>
-                    <p><strong>Почта:</strong><br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="701415050907054218301d14191b5e131f1d">[email&#160;protected]</a></p>
+                    <p><span class="label">Адрес:</span><br>текстекстекстеквстетвстекстекст</p>
+                    <p><span class="label">Телефон:</span><br>+7(903)450-64-78<br>+7(903)450-64-78</p>
+                    <p><span class="label">Почта:</span><br>deuywu2h@mdik.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="js/main.js"></script>
+</body>
+</html>
