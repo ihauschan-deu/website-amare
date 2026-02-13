@@ -32,37 +32,17 @@ img {
 .hero {
     background-color: #4b2e14;
     min-height: 100vh;
-    padding: 50px 0;
+    padding: 40px 0;
 }
 
-.nav {
-    background-color: #d8d5c6;
-    border-radius: 30px;
-    padding: 15px 40px;
-    display: inline-flex;
-    justify-content: center;
-    gap: 50px;
-    margin-bottom: 30px;
-}
-
-.nav-link {
-    font-size: 20px;
-    color: black;
-    text-decoration: none;
-    letter-spacing: 1px;
-    font-weight: 350;
-    transition: opacity 0.3s;
-}
-
-.nav-link:hover {
-    opacity: 0.7;
+.hero .container {
+    padding: 0 40px;
 }
 
 .hero-content {
     background-color: #d8d5c6;
     border-radius: 30px;
     padding: 40px;
-    margin-top: 20px;
 }
 
 .hero-image {
@@ -92,6 +72,32 @@ img {
     pointer-events: none;
 }
 
+.nav {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    background-color: #d8d5c6;
+    border-radius: 30px;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    z-index: 10;
+}
+
+.nav-link {
+    font-size: 20px;
+    color: black;
+    text-decoration: none;
+    letter-spacing: 1px;
+    font-weight: 350;
+    transition: opacity 0.3s;
+}
+
+.nav-link:hover {
+    opacity: 0.7;
+}
+
 .brand-title {
     position: absolute;
     bottom: 40px;
@@ -116,6 +122,7 @@ img {
 .hero-mission {
     flex: 1;
     min-width: 300px;
+    text-align: center;
 }
 
 .hero-mission p {
@@ -142,7 +149,9 @@ img {
 }
 
 .feature-box {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #a2adcb;
     height: 64px;
     width: 100%;
@@ -152,6 +161,12 @@ img {
     cursor: pointer;
     transition: background-color 0.3s;
     text-decoration: none;
+    font-size: 18px;
+    font-weight: 350;
+    color: black;
+    letter-spacing: 0.5px;
+    padding: 0 20px;
+    text-align: center;
 }
 
 .feature-box:hover {
@@ -161,7 +176,11 @@ img {
 /* ========== ABOUT SECTION ========== */
 .about {
     background-color: #4b2e14;
-    padding: 80px 0;
+    padding: 0 0 40px 0;
+}
+
+.about .container {
+    padding: 0 40px;
 }
 
 .about-content {
@@ -192,13 +211,14 @@ img {
 /* ========== PRODUCTS SECTION ========== */
 .products {
     background-color: #4b2e14;
-    padding: 80px 0;
+    padding: 40px 0;
 }
 
 .products .container {
     background-color: #d8d5c6;
     border-radius: 30px;
     padding: 60px 40px;
+    margin: 0 40px;
 }
 
 .section-title {
@@ -281,7 +301,11 @@ img {
 /* ========== CONTACT SECTION ========== */
 .contact {
     background-color: #4b2e14;
-    padding: 80px 0;
+    padding: 40px 0 80px 0;
+}
+
+.contact .container {
+    padding: 0 40px;
 }
 
 .contact-grid {
