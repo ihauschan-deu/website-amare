@@ -81,36 +81,53 @@ if (contactForm) {
     });
 }
 
-// Dynamic product loading (example)
+// Load products from JSON file
 async function loadProducts() {
-    const productGrid = document.querySelector('.product-grid');
+    const productGrid = document.getElementById('productGrid');
+    const featuredContainer = document.querySelector('.hero-features');
     
     if (!productGrid) return;
     
     try {
-        const response = await fetch('/api/products');
-        const products = await response.json();
+        const response = await fetch('products/products.json');
+        const data = await response.json();
         
         // Clear existing products
         productGrid.innerHTML = '';
         
-        // Add products from backend
-        products.forEach(product => {
+        // Load featured products for "Новинки" section
+        const featuredProducts = data.products.filter(p => p.featured).slice(0, 3);
+        if (featuredContainer && featuredProducts.length > 0) {
+            // Clear existing feature boxes
+            const existingBoxes = featuredContainer.querySelectorAll('.feature-box');
+            existingBoxes.forEach((box, index) => {
+                if (featuredProducts[index]) {
+                    box.textContent = featuredProducts[index].name;
+                    box.href = featuredProducts[index].link || '#products';
+                }
+            });
+        }
+        
+        // Add all products to catalog
+        data.products.forEach(product => {
             const card = document.createElement('div');
             card.className = 'product-card';
             card.innerHTML = `
                 <div class="product-image">
-                    <img src="${product.image || 'https://www.figma.com/api/mcp/asset/ccc5bb50-fb58-4ef9-9641-f1d3ab9ff910'}" alt="${product.name}">
+                    <img src="${product.image}" alt="${product.name}" onerror="this.src='https://www.figma.com/api/mcp/asset/ccc5bb50-fb58-4ef9-9641-f1d3ab9ff910'">
                 </div>
                 <h3 class="product-name">${product.name}</h3>
-                <a href="#" class="product-link">Узнать больше!</a>
+                <a href="${product.link || '#'}" class="product-link">Узнать больше!</a>
             `;
             productGrid.appendChild(card);
         });
         
+        console.log(`Загружено ${data.products.length} продуктов`);
+        
     } catch (error) {
-        console.log('Using static products - backend не подключен');
-        // Static products are already in HTML, so no need to do anything
+        console.log('Ошибка загрузки продуктов:', error);
+        console.log('Используются статические продукты из HTML');
+        // Static products from HTML will be displayed
     }
 }
 
