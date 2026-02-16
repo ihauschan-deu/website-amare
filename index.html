@@ -122,6 +122,42 @@
     </div>
 </section>
 
+<!-- PRODUCT MODAL -->
+<div id="productModal" class="modal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeProductModal()">×</button>
+        
+        <div class="modal-left">
+            <div class="modal-image">
+                <img id="modalImage" src="" alt="Product">
+            </div>
+            <div class="modal-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+        
+        <div class="modal-right">
+            <h2 class="modal-title" id="modalTitle">Название продукта</h2>
+            <p class="modal-description" id="modalDescription">
+                Описание продукта будет здесь. Этот текст легко редактируется в файле products.json
+            </p>
+            
+            <div class="modal-details">
+                <h3>Характеристики:</h3>
+                <ul id="modalFeatures">
+                    <li>Высокое качество</li>
+                    <li>Натуральные ингредиенты</li>
+                    <li>Для профессионального использования</li>
+                </ul>
+            </div>
+            
+            <button class="modal-button" onclick="contactUs()">Связаться с нами</button>
+        </div>
+    </div>
+</div>
+
 <script src="js/main.js"></script>
 </body>
 </html>
