@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление продуктами - Амаре Групп</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #4b2e14;
+            color: white;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #d8d5c6;
+            border-radius: 20px;
+            padding: 40px;
+            color: #4b2e14;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            color: #4b2e14;
+        }
+
+        .form-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #4b2e14;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #a2adcb;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        button {
+            background-color: #4b2e14;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #5d3a1a;
+        }
+
+        .products-list {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .product-item {
+            background: #f5f5f5;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-info h3 {
+            color: #4b2e14;
+            margin-bottom: 5px;
+        }
+
+        .product-info p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .badge {
+            background-color: #a2adcb;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        .btn-delete {
+            background-color: #d9534f;
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        .btn-delete:hover {
+            background-color: #c9302c;
+        }
+
+        .output-section {
+            background: #2d2d2d;
+            color: #00ff00;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            font-family: 'Courier New', monospace;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .success {
+            color: #00ff00;
+        }
+
+        .error {
+            color: #ff4444;
+        }
+
+        .info-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛠️ Панель управления продуктами</h1>
+
+        <div class="info-box">
+            ℹ️ <strong>Важно:</strong> Эта страница позволяет редактировать файл products.json. 
+            После добавления продукта скопируйте JSON код ниже в файл <code>products/products.json</code>
+        </div>
+
+        <!-- Add Product Form -->
+        <div class="form-section">
+            <h2>➕ Добавить новый продукт</h2>
+            <form id="addProductForm">
+                <div class="form-group">
+                    <label for="productName">Название продукта *</label>
+                    <input type="text" id="productName" required placeholder="Глазурь на эквиваленте 'Святая'">
+                </div>
+
+                <div class="form-group">
+                    <label for="productDescription">Описание</label>
+                    <textarea id="productDescription" placeholder="Высококачественная глазурь для кондитерских изделий"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="productImage">Путь к изображению *</label>
+                    <input type="text" id="productImage" required placeholder="images/product1.jpg">
+                    <small style="color: #666;">Сначала загрузите изображение в папку images/</small>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="productFeatured">
+                    <label for="productFeatured" style="margin-bottom: 0;">Показать в блоке "Новинки"</label>
+                </div>
+
+                <div class="form-group">
+                    <label for="productLink">Ссылка (необязательно)</label>
+                    <input type="text" id="productLink" placeholder="#" value="#">
+                </div>
+
+                <button type="submit">Добавить продукт</button>
+            </form>
+        </div>
+
+        <!-- Products List -->
+        <div class="products-list">
+            <h2>📦 Текущие продукты</h2>
+            <div id="productsList"></div>
+        </div>
+
+        <!-- JSON Output -->
+        <div class="output-section">
+            <h3 style="color: white; margin-bottom: 15px;">📄 JSON для копирования в products.json:</h3>
+            <pre id="jsonOutput"></pre>
+            <button onclick="copyJSON()" style="margin-top: 15px;">📋 Копировать JSON</button>
+        </div>
+    </div>
+
+    <script>
+        let products = [];
+
+        // Load existing products
+        async function loadExistingProducts() {
+            try {
+                const response = await fetch('products/products.json');
+                const data = await response.json();
+                products = data.products;
+                renderProducts();
+                updateJSON();
+            } catch (error) {
+                console.log('Не удалось загрузить существующие продукты');
+                products = [];
+            }
+        }
+
+        // Add product
+        document.getElementById('addProductForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const newProduct = {
+                id: products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1,
+                name: document.getElementById('productName').value,
+                description: document.getElementById('productDescription').value,
+                image: document.getElementById('productImage').value,
+                featured: document.getElementById('productFeatured').checked,
+                link: document.getElementById('productLink').value || '#'
+            };
+
+            products.push(newProduct);
+            renderProducts();
+            updateJSON();
+
+            // Clear form
+            this.reset();
+            alert('✅ Продукт добавлен! Скопируйте JSON ниже в файл products.json');
+        });
+
+        // Render products list
+        function renderProducts() {
+            const container = document.getElementById('productsList');
+            container.innerHTML = '';
+
+            if (products.length === 0) {
+                container.innerHTML = '<p style="color: #666;">Пока нет продуктов. Добавьте первый!</p>';
+                return;
+            }
+
+            products.forEach((product, index) => {
+                const item = document.createElement('div');
+                item.className = 'product-item';
+                item.innerHTML = `
+                    <div class="product-info">
+                        <h3>
+                            ${product.name}
+                            ${product.featured ? '<span class="badge">Новинка</span>' : ''}
+                        </h3>
+                        <p>ID: ${product.id} | Изображение: ${product.image}</p>
+                    </div>
+                    <button class="btn-delete" onclick="deleteProduct(${index})">🗑️ Удалить</button>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        // Delete product
+        function deleteProduct(index) {
+            if (confirm('Удалить этот продукт?')) {
+                products.splice(index, 1);
+                renderProducts();
+                updateJSON();
+            }
+        }
+
+        // Update JSON output
+        function updateJSON() {
+            const output = document.getElementById('jsonOutput');
+            const jsonData = {
+                products: products
+            };
+            output.textContent = JSON.stringify(jsonData, null, 2);
+        }
+
+        // Copy JSON to clipboard
+        function copyJSON() {
+            const output = document.getElementById('jsonOutput');
+            navigator.clipboard.writeText(output.textContent).then(() => {
+                alert('✅ JSON скопирован в буфер обмена!\nТеперь вставьте его в файл products/products.json');
+            });
+        }
+
+        // Initialize
+        loadExistingProducts();
+    </script>
+</body>
+</html>
