@@ -163,10 +163,24 @@ if (contactForm) {
         e.preventDefault();
         
         const formData = new FormData(this);
+        const email = formData.get('email');
         const message = formData.get('message');
+        
+        // Validation
+        if (!email || email.trim() === '') {
+            alert('Пожалуйста, введите ваш email');
+            return;
+        }
         
         if (!message || message.trim() === '') {
             alert('Пожалуйста, введите сообщение');
+            return;
+        }
+        
+        // Email format validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Пожалуйста, введите корректный email');
             return;
         }
         
@@ -177,19 +191,20 @@ if (contactForm) {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
+                    email: email,
                     message: message
                 })
             });
             
             if (response.ok) {
-                alert('Сообщение отправлено!');
+                alert('Сообщение отправлено! Мы свяжемся с вами по email: ' + email);
                 this.reset();
             } else {
                 throw new Error('Ошибка отправки');
             }
         } catch (error) {
             console.log('Backend не подключен:', error);
-            alert('Спасибо за сообщение! (Demo mode - backend не подключен)');
+            alert('Спасибо за сообщение! Мы свяжемся с вами по email: ' + email + '\n(Demo mode - backend не подключен)');
             this.reset();
         }
     });
