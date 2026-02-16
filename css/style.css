@@ -220,6 +220,7 @@ img {
     padding: 60px 40px;
     margin: 0 40px;
     position: relative;
+    overflow: hidden;
 }
 
 .section-title {
@@ -240,22 +241,26 @@ img {
 
 .product-grid-wrapper {
     position: relative;
-    width: 100%;
     overflow: hidden;
 }
 
 .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
     gap: 40px;
     overflow-x: auto;
     scroll-behavior: smooth;
     padding-bottom: 20px;
-    scrollbar-width: none; 
+    scrollbar-width: none; /* Firefox */
+    /* Hide scrollbar but allow scrolling */
 }
 
 .product-grid::-webkit-scrollbar {
     display: none; /* Chrome, Safari */
+}
+
+/* Show only 3 cards at a time */
+.products .container {
+    max-width: calc(380px * 3 + 40px * 2 + 80px); /* 3 cards + 2 gaps + padding */
 }
 
 .scroll-arrow {
@@ -293,6 +298,7 @@ img {
     align-items: center;
     transition: transform 0.3s;
     min-width: 380px;
+    max-width: 380px;
     flex-shrink: 0;
 }
 
@@ -411,7 +417,7 @@ img {
     padding: 15px 50px;
     font-size: 36px;
     font-weight: 350;
-    color: #4B2E14;
+    color: #d8d5c6;
     letter-spacing: 1.8px;
     cursor: pointer;
     transition: all 0.3s;
