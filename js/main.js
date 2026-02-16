@@ -19,7 +19,11 @@ const productGrid = document.getElementById('productGrid');
 
 if (scrollButton && productGrid) {
     scrollButton.addEventListener('click', function() {
-        const scrollAmount = 420; // card width + gap
+        // Scroll exactly 3 cards width (3 cards + 2 gaps)
+        const cardWidth = 380; // card width
+        const gap = 40; // gap between cards
+        const scrollAmount = (cardWidth * 3) + (gap * 2); // width of 3 cards + 2 gaps
+        
         productGrid.scrollBy({
             left: scrollAmount,
             behavior: 'smooth'
