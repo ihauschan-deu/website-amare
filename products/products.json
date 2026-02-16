@@ -1,0 +1,44 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Глазурь на эквиваленте \"Святая\"",
+      "description": "Высококачественная глазурь для кондитерских изделий",
+      "image": "images/product1.jpg",
+      "featured": true,
+      "link": "#"
+    },
+    {
+      "id": 2,
+      "name": "Глазурь на эквиваленте \"Святая\"",
+      "description": "Высококачественная глазурь для кондитерских изделий",
+      "image": "images/product2.jpg",
+      "featured": true,
+      "link": "#"
+    },
+    {
+      "id": 3,
+      "name": "Глазурь на эквиваленте \"Святая\"",
+      "description": "Высококачественная глазурь для кондитерских изделий",
+      "image": "images/product3.jpg",
+      "featured": false,
+      "link": "#"
+    },
+    {
+      "id": 4,
+      "name": "Шоколадная глазурь",
+      "description": "Натуральная шоколадная глазурь",
+      "image": "images/product4.jpg",
+      "featured": false,
+      "link": "#"
+    },
+    {
+      "id": 5,
+      "name": "Белая глазурь",
+      "description": "Белая кондитерская глазурь",
+      "image": "images/product5.jpg",
+      "featured": false,
+      "link": "#"
+    }
+  ]
+}
