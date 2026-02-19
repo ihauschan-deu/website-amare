@@ -317,7 +317,7 @@ let products = [];
 /* Load existing */
 async function init() {
     try {
-        const res  = await fetch('products.json');
+        const res  = await fetch('products/products.json');
         const data = await res.json();
         products = data.products || [];
     } catch {
