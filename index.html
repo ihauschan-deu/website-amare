@@ -4,45 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Амаре Групп</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- HERO -->
+<!-- ======== HERO ======== -->
 <section class="hero" id="hero">
     <div class="container">
         <div class="hero-content">
+
             <div class="hero-image">
-                <img src="https://www.figma.com/api/mcp/asset/4eadad9e-6d17-4879-b686-cef1942221da" alt="Hero Background">
+                <!-- Фон: замените на images/backgrounds/hero-bg.jpg -->
+                <img src="images/backgrounds/hero-bg.jpg" alt="Амаре Групп">
                 <div class="hero-overlay"></div>
-                
+
                 <nav class="nav">
-                    <a href="#about" class="nav-link">О нас</a>
-                    <a href="#products" class="nav-link">Католог</a>
-                    <a href="#contact" class="nav-link">Контакты</a>
+                    <a href="#about"    class="nav-link">О нас</a>
+                    <a href="#products" class="nav-link">Каталог</a>
+                    <a href="#contact"  class="nav-link">Контакты</a>
                 </nav>
-                
+
                 <h1 class="brand-title">АМАРЕ<br>ГРУПП</h1>
             </div>
 
             <div class="hero-bottom">
                 <div class="hero-mission">
-                    <p>Наша цель -</p>
+                    <p>Наша цель —</p>
                     <p>сделать жизнь слаще!</p>
                 </div>
 
                 <div class="hero-features">
                     <h2>Новинки</h2>
-                    <a href="#products" class="feature-box">Глазурь на эквиваленте "Святая"</a>
-                    <a href="#products" class="feature-box">Глазурь на эквиваленте "Святая"</a>
-                    <a href="#contact" class="feature-box">Глазурь на эквиваленте "Святая"</a>
+                    <!-- Заполняются автоматически из products.json (featured: true) -->
+                    <a href="#products" class="feature-box" id="featured-0"></a>
+                    <a href="#products" class="feature-box" id="featured-1"></a>
+                    <a href="#products" class="feature-box" id="featured-2"></a>
                 </div>
             </div>
+
         </div>
     </div>
 </section>
 
-<!-- ABOUT US -->
+<!-- ======== ABOUT ======== -->
 <section class="about" id="about">
     <div class="container">
         <div class="about-content">
@@ -52,7 +56,7 @@
     </div>
 </section>
 
-<!-- PRODUCTS -->
+<!-- ======== PRODUCTS ======== -->
 <section class="products" id="products">
     <div class="container">
         <div class="section-title">
@@ -60,33 +64,10 @@
         </div>
 
         <div class="product-grid-wrapper">
-            <div class="product-grid" id="productGrid">
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://www.figma.com/api/mcp/asset/ccc5bb50-fb58-4ef9-9641-f1d3ab9ff910" alt="Гречневые шарики">
-                    </div>
-                    <h3 class="product-name">Глазурь на эквиваленте "Святая"</h3>
-                    <a href="#" class="product-link">Узнать больше!</a>
-                </div>
+            <!-- Карточки заполняются автоматически из products.json -->
+            <div class="product-grid" id="productGrid"></div>
 
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://www.figma.com/api/mcp/asset/ccc5bb50-fb58-4ef9-9641-f1d3ab9ff910" alt="Гречневые шарики">
-                    </div>
-                    <h3 class="product-name">Глазурь на эквиваленте "Святая"</h3>
-                    <a href="#" class="product-link">Узнать больше!</a>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://www.figma.com/api/mcp/asset/ccc5bb50-fb58-4ef9-9641-f1d3ab9ff910" alt="Гречневые шарики">
-                    </div>
-                    <h3 class="product-name">Глазурь на эквиваленте "Святая"</h3>
-                    <a href="#" class="product-link">Узнать больше!</a>
-                </div>
-            </div>
-            
-            <button class="scroll-arrow" id="scrollRight" aria-label="Scroll right">
+            <button class="scroll-arrow" id="scrollRight" aria-label="Прокрутить вправо">
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
                     <path d="M15 10 L25 20 L15 30" stroke="#4b2e14" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -95,53 +76,57 @@
     </div>
 </section>
 
-<!-- CONTACT -->
+<!-- ======== CONTACT ======== -->
 <section class="contact" id="contact">
     <div class="contact-titles">
         <h2>Напишите нам</h2>
-        <h2>Или свяжитесь с нами по другому!</h2>
+        <h2>Или свяжитесь с нами иначе!</h2>
     </div>
-    
-    <div class="contact-container">
-        <div class="contact-grid">
-            <div class="contact-form">
-                <form id="contactForm">
-                    <input type="email" name="email" placeholder="Ваш email" required>
-                    <textarea name="message" placeholder="Место для сообщения" rows="8"></textarea>
-                    <button type="submit">Отправить</button>
-                </form>
-            </div>
 
-            <div class="contact-info">
-                <div class="contact-details">
-                    <div class="contact-item">
-                        <p class="contact-label">Адрес:</p>
-                        <p class="contact-value">текстекстекстеквстетвстекстекст</p>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <p class="contact-label">Телефон:</p>
-                        <p class="contact-value">+7(903)450-64-78<br>+7(903)450-64-78</p>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <p class="contact-label">Почта:</p>
-                        <p class="contact-value">deuywu2h@mdik.com</p>
-                    </div>
+    <div class="contact-grid">
+        <div class="contact-form">
+            <form id="contactForm">
+                <input type="email" name="email" placeholder="Ваш email" required>
+                <textarea name="message" placeholder="Место для сообщения" rows="8"></textarea>
+                <button type="submit">Отправить</button>
+            </form>
+        </div>
+
+        <div class="contact-info">
+            <div class="contact-details">
+                <div class="contact-item">
+                    <p class="contact-label">Адрес:</p>
+                    <!-- Измените адрес здесь -->
+                    <p class="contact-value">ул. Примерная, д. 1, Москва</p>
+                </div>
+                <div class="contact-item">
+                    <p class="contact-label">Телефон:</p>
+                    <!-- Измените телефоны здесь -->
+                    <p class="contact-value">
+                        <a href="tel:+79034506478" style="color:inherit;text-decoration:none;">+7 (903) 450-64-78</a><br>
+                        <a href="tel:+79034506478" style="color:inherit;text-decoration:none;">+7 (903) 450-64-78</a>
+                    </p>
+                </div>
+                <div class="contact-item">
+                    <p class="contact-label">Почта:</p>
+                    <!-- Измените email здесь -->
+                    <p class="contact-value">
+                        <a href="mailto:info@amare.ru" style="color:inherit;text-decoration:none;">info@amare.ru</a>
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- PRODUCT MODAL -->
+<!-- ======== PRODUCT MODAL ======== -->
 <div id="productModal" class="modal">
     <div class="modal-content">
         <button class="modal-close" onclick="closeProductModal()">×</button>
-        
+
         <div class="modal-left">
             <div class="modal-image">
-                <img id="modalImage" src="" alt="Product">
+                <img id="modalImage" src="" alt="">
             </div>
             <div class="modal-dots">
                 <span class="dot active"></span>
@@ -149,20 +134,19 @@
                 <span class="dot"></span>
             </div>
         </div>
-        
+
         <div class="modal-right">
-            <h2 class="modal-title" id="modalTitle">Название продукта</h2>
-            <p class="modal-description" id="modalDescription">
-                Описание продукта будет здесь. Этот текст легко редактируется в файле products.json
-            </p>
-            
+            <h2 class="modal-title" id="modalTitle"></h2>
+            <p class="modal-description" id="modalDescription"></p>
             <div class="modal-details">
                 <h3>Характеристики:</h3>
-                <ul id="modalFeatures">
-                    <li>Высокое качество</li>
-                    <li>Натуральные ингредиенты</li>
-                    <li>Для профессионального использования</li>
-                </ul>
+                <ul id="modalFeatures"></ul>
             </div>
-            
-            <button class="modal-button" onclick="contactUs()">Св�
+            <button class="modal-button" onclick="contactUs()">Связаться с нами</button>
+        </div>
+    </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
