@@ -67,13 +67,14 @@
         <div class="product-grid-wrapper">
             <!-- Карточки заполняются автоматически из products/products.json -->
             <div class="product-grid" id="productGrid"></div>
-
-            <button class="scroll-arrow" id="scrollRight" aria-label="Прокрутить вправо">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                    <path d="M15 10 L25 20 L15 30" stroke="#4b2e14" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
         </div>
+
+        <!-- Arrow is a direct child of .container so it sits bottom-right of the beige box -->
+        <button class="scroll-arrow" id="scrollRight" aria-label="Прокрутить вправо">
+            <svg width="36" height="36" viewBox="0 0 40 40" fill="none">
+                <path d="M15 10 L25 20 L15 30" stroke="#4b2e14" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
     </div>
 </section>
 
@@ -112,7 +113,7 @@
                     <p class="contact-label">Почта:</p>
                     <!-- Измените email здесь -->
                     <p class="contact-value">
-                        <a href="mailto:info@amare.ru" style="color:inherit;text-decoration:none;">info@amare.ru</a>
+                        <a href="/cdn-cgi/l/email-protection#0e676068614e6f636f7c6b207c7b" style="color:inherit;text-decoration:none;"><span class="__cf_email__" data-cfemail="670e09010827060a061502491512">[email&#160;protected]</span></a>
                     </p>
                 </div>
             </div>
@@ -143,11 +144,4 @@
                 <h3>Характеристики:</h3>
                 <ul id="modalFeatures"></ul>
             </div>
-            <button class="modal-button" onclick="contactUs()">Связаться с нами</button>
-        </div>
-    </div>
-</div>
-
-<script src="js/main.js"></script>
-</body>
-</html>
+            <button class="modal-button" onclick="contactUs()">С
