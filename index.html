@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Амаре Групп</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -14,7 +14,7 @@
         <div class="hero-content">
 
             <div class="hero-image">
-                <!-- Фон: замените на images/backgrounds/hero-bg.jpg -->
+                <!-- Фон: замените файл images/backgrounds/hero-bg.jpg на своё фото -->
                 <img src="images/backgrounds/hero-bg.jpg" alt="Амаре Групп">
                 <div class="hero-overlay"></div>
 
@@ -35,7 +35,7 @@
 
                 <div class="hero-features">
                     <h2>Новинки</h2>
-                    <!-- Заполняются автоматически из products.json (featured: true) -->
+                    <!-- Заполняются автоматически из products/products.json (featured: true) -->
                     <a href="#products" class="feature-box" id="featured-0"></a>
                     <a href="#products" class="feature-box" id="featured-1"></a>
                     <a href="#products" class="feature-box" id="featured-2"></a>
@@ -51,6 +51,7 @@
     <div class="container">
         <div class="about-content">
             <h2>О нас</h2>
+            <!-- Измените текст здесь -->
             <p>Мы производим качественные кондитерские ингредиенты. Наша миссия — создавать продукты, которые делают жизнь слаще.</p>
         </div>
     </div>
@@ -64,7 +65,7 @@
         </div>
 
         <div class="product-grid-wrapper">
-            <!-- Карточки заполняются автоматически из products.json -->
+            <!-- Карточки заполняются автоматически из products/products.json -->
             <div class="product-grid" id="productGrid"></div>
 
             <button class="scroll-arrow" id="scrollRight" aria-label="Прокрутить вправо">
@@ -136,8 +137,8 @@
         </div>
 
         <div class="modal-right">
-            <h2 class="modal-title" id="modalTitle"></h2>
-            <p class="modal-description" id="modalDescription"></p>
+            <h2 class="modal-title"       id="modalTitle"></h2>
+            <p  class="modal-description" id="modalDescription"></p>
             <div class="modal-details">
                 <h3>Характеристики:</h3>
                 <ul id="modalFeatures"></ul>
@@ -147,6 +148,6 @@
     </div>
 </div>
 
-<script src="main.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
