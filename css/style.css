@@ -217,40 +217,38 @@ img {
 }
 
 /*
-  .container already provides padding: 0 var(--pad-x) on sides.
-  We only add top/bottom here so cards align with content in hero/about.
+  .container gives padding: 0 var(--pad-x) on sides (40px each).
+  Only override top/bottom padding here — horizontal comes from .container.
 */
 .products .container {
     background-color: var(--beige);
     border-radius: var(--radius);
     padding-top: var(--pad-section);
-    padding-bottom: var(--pad-section);
+    /* Bottom padding is larger to give space below the arrow */
+    padding-bottom: 100px;
     position: relative;
-    overflow: visible;
+    overflow: hidden;
 }
 
+/* Title pill — tan/gold background matching the design */
 .section-title {
-    margin-bottom: var(--pad-section);
+    margin-bottom: 40px;
 }
 
 .section-title h2 {
-    font-size: 36px;
-    font-weight: 350;
+    font-size: 32px;
+    font-weight: 400;
     color: var(--brown);
     letter-spacing: 1.8px;
-    padding: 20px 30px;
-    background-color: var(--blue-grey);
-    border-radius: 15px;
+    padding: 14px 36px;
+    background-color: var(--gold);
+    border-radius: 40px;
     display: inline-block;
-    width: 300px;
 }
 
-/* The wrapper clips the grid scroll but reserves space for the arrow on the right */
+/* Grid wrapper — no extra padding, cards go edge-to-edge within container padding */
 .product-grid-wrapper {
     position: relative;
-    overflow: hidden;
-    /* Reserve 100px for the arrow button so it stays inside the beige box */
-    padding-right: 100px;
 }
 
 .product-grid {
@@ -258,7 +256,7 @@ img {
     gap: var(--pad-x);
     overflow-x: auto;
     scroll-behavior: smooth;
-    padding-bottom: 20px;
+    padding-bottom: 8px;
     scrollbar-width: none;
 }
 
@@ -266,29 +264,30 @@ img {
     display: none;
 }
 
-/* Arrow sits at the right edge of the wrapper, always visible */
+/* Arrow — bottom-right corner of the beige container, as in the design */
 .scroll-arrow {
     position: absolute;
-    right: 10px;
-    top: 45%;
-    transform: translateY(-50%);
-    width: 80px;
-    height: 80px;
+    bottom: 24px;
+    right: var(--pad-x);
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
-    background-color: white;
-    border: 3px solid var(--gold);
+    background-color: var(--beige);
+    border: 3px solid var(--brown);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s;
+    transition: background-color 0.3s;
     z-index: 10;
-    box-shadow: 0 4px 16px rgba(75, 46, 20, 0.15);
 }
 
 .scroll-arrow:hover {
-    background-color: var(--beige);
-    transform: translateY(-50%) scale(1.08);
+    background-color: var(--brown);
+}
+
+.scroll-arrow:hover svg path {
+    stroke: white;
 }
 
 /* ========== PRODUCT CARD ========== */
@@ -726,7 +725,6 @@ img {
     .product-link { font-size: 18px; }
     /* Hide arrow on mobile — user can swipe instead */
     .scroll-arrow { display: none; }
-    .product-grid-wrapper { padding-right: 0; overflow: hidden; }
 
     .contact-titles  { flex-direction: column; gap: 10px; }
     .contact-titles h2 { font-size: 24px; }
