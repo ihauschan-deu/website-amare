@@ -1,254 +1,168 @@
-// Smooth scroll for navigation links
+/* ============================================================
+   main.js — Амаре Групп
+   ============================================================ */
+
+/* ---------- Smooth scroll ---------- */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     });
 });
 
-// Horizontal scroll for products
-const scrollButton = document.getElementById('scrollRight');
+/* ---------- Product scroll arrow ---------- */
+const scrollBtn  = document.getElementById('scrollRight');
 const productGrid = document.getElementById('productGrid');
 
-if (scrollButton && productGrid) {
-    scrollButton.addEventListener('click', function() {
-        const cardWidth = 380;
-        const gap = 40;
-        const scrollAmount = (cardWidth * 3) + (gap * 2);
-        
-        productGrid.scrollBy({
-            left: scrollAmount,
-            behavior: 'smooth'
-        });
+if (scrollBtn && productGrid) {
+    scrollBtn.addEventListener('click', () => {
+        const cardWidth  = 380;
+        const gap        = 40;
+        productGrid.scrollBy({ left: (cardWidth + gap) * 3, behavior: 'smooth' });
     });
-    
-    // Hide button when at end
-    productGrid.addEventListener('scroll', function() {
-        const maxScroll = productGrid.scrollWidth - productGrid.clientWidth;
-        if (productGrid.scrollLeft >= maxScroll - 10) {
-            scrollButton.style.opacity = '0.3';
-            scrollButton.style.cursor = 'default';
-        } else {
-            scrollButton.style.opacity = '1';
-            scrollButton.style.cursor = 'pointer';
-        }
+
+    productGrid.addEventListener('scroll', () => {
+        const atEnd = productGrid.scrollLeft >= productGrid.scrollWidth - productGrid.clientWidth - 10;
+        scrollBtn.style.opacity = atEnd ? '0.3' : '1';
+        scrollBtn.style.cursor  = atEnd ? 'default' : 'pointer';
     });
 }
 
-// Contact form handling
+/* ---------- Contact form ---------- */
 const contactForm = document.getElementById('contactForm');
-
 if (contactForm) {
-    contactForm.addEventListener('submit', async function(e) {
+    contactForm.addEventListener('submit', async function (e) {
         e.preventDefault();
-        
-        const formData = new FormData(this);
-        const email = formData.get('email');
-        const message = formData.get('message');
-        
-        // Validation
-        if (!email || email.trim() === '') {
-            alert('Пожалуйста, введите ваш email');
-            return;
-        }
-        
-        if (!message || message.trim() === '') {
-            alert('Пожалуйста, введите сообщение');
-            return;
-        }
-        
-        // Email format validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
+
+        const email   = this.email.value.trim();
+        const message = this.message.value.trim();
+
+        if (!email)   { alert('Пожалуйста, введите ваш email');    return; }
+        if (!message) { alert('Пожалуйста, введите сообщение');    return; }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             alert('Пожалуйста, введите корректный email');
             return;
         }
-        
+
         try {
-            const response = await fetch('/api/contact', {
+            const res = await fetch('/api/contact', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: email,
-                    message: message
-                })
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, message })
             });
-            
-            if (response.ok) {
+            if (res.ok) {
                 alert('Сообщение отправлено! Мы свяжемся с вами по email: ' + email);
                 this.reset();
             } else {
-                throw new Error('Ошибка отправки');
+                throw new Error();
             }
-        } catch (error) {
-            console.log('Backend не подключен:', error);
-            alert('Спасибо за сообщение! Мы свяжемся с вами по email: ' + email + '\n(Demo mode - backend не подключен)');
+        } catch {
+            /* Demo mode — backend not connected */
+            alert('Спасибо за сообщение! Мы свяжемся с вами по email: ' + email);
             this.reset();
         }
     });
 }
 
-// Load products from JSON file
+/* ---------- Load products from products.json ---------- */
 async function loadProducts() {
-    const productGrid = document.getElementById('productGrid');
-    const featuredContainer = document.querySelector('.hero-features');
-    
-    if (!productGrid) return;
-    
+    const grid = document.getElementById('productGrid');
+    if (!grid) return;
+
     try {
-        const response = await fetch('products/products.json');
-        const data = await response.json();
-        
-        // Clear existing products
-        productGrid.innerHTML = '';
-        
-        // Load featured products for "Новинки" section
-        const featuredProducts = data.products.filter(p => p.featured).slice(0, 3);
-        if (featuredContainer && featuredProducts.length > 0) {
-            // Clear existing feature boxes
-            const existingBoxes = featuredContainer.querySelectorAll('.feature-box');
-            existingBoxes.forEach((box, index) => {
-                if (featuredProducts[index]) {
-                    box.textContent = featuredProducts[index].name;
-                    box.href = featuredProducts[index].link || '#products';
-                }
-            });
-        }
-        
-        // Add all products to catalog
+        const res  = await fetch('products.json');
+        const data = await res.json();
+
+        /* Featured → Новинки блок */
+        const featured = data.products.filter(p => p.featured).slice(0, 3);
+        featured.forEach((p, i) => {
+            const box = document.getElementById('featured-' + i);
+            if (box) box.textContent = p.name;
+        });
+
+        /* All products → grid */
+        grid.innerHTML = '';
         data.products.forEach(product => {
             const card = document.createElement('div');
             card.className = 'product-card';
             card.innerHTML = `
                 <div class="product-image">
-                    <img src="${product.image}" alt="${product.name}" onerror="this.src='https://www.figma.com/api/mcp/asset/ccc5bb50-fb58-4ef9-9641-f1d3ab9ff910'">
+                    <img src="${product.image}" alt="${product.name}"
+                         onerror="this.parentElement.style.background='#d8d5c6'">
                 </div>
                 <h3 class="product-name">${product.name}</h3>
-                <a href="${product.link || '#'}" class="product-link">Узнать больше!</a>
+                <span class="product-link">Узнать больше!</span>
             `;
-            
-            // Add click event to open modal
-            card.addEventListener('click', function(e) {
-                e.preventDefault();
-                openProductModal(product);
-            });
-            
-            productGrid.appendChild(card);
+            card.addEventListener('click', () => openProductModal(product));
+            grid.appendChild(card);
         });
-        
-        console.log(`Загружено ${data.products.length} продуктов`);
-        
-    } catch (error) {
-        console.log('Ошибка загрузки продуктов:', error);
-        console.log('Используются статические продукты из HTML');
+
+        /* Animate on scroll */
+        setTimeout(() => {
+            const cards = document.querySelectorAll('.product-card');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity   = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+
+            cards.forEach(card => {
+                card.style.opacity    = '0';
+                card.style.transform  = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+        }, 50);
+
+    } catch (err) {
+        console.error('Ошибка загрузки продуктов:', err);
     }
 }
 
-// ========== PRODUCT MODAL ==========
-
-// Open product modal
-function openProductModal(productData) {
+/* ---------- Modal ---------- */
+function openProductModal(product) {
     const modal = document.getElementById('productModal');
-    const modalImage = document.getElementById('modalImage');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDescription = document.getElementById('modalDescription');
-    const modalFeatures = document.getElementById('modalFeatures');
-    
     if (!modal) return;
-    
-    // Set product data
-    modalImage.src = productData.image;
-    modalImage.alt = productData.name;
-    modalTitle.textContent = productData.name;
-    modalDescription.textContent = productData.description || 'Высококачественный продукт для профессионального использования.';
-    
-    // Set features
-    if (productData.features && productData.features.length > 0) {
-        modalFeatures.innerHTML = productData.features.map(f => `<li>${f}</li>`).join('');
-    } else {
-        modalFeatures.innerHTML = `
-            <li>Высокое качество</li>
-            <li>Натуральные ингредиенты</li>
-            <li>Для профессионального использования</li>
-        `;
-    }
-    
-    // Show modal
+
+    document.getElementById('modalImage').src       = product.image;
+    document.getElementById('modalImage').alt       = product.name;
+    document.getElementById('modalTitle').textContent       = product.name;
+    document.getElementById('modalDescription').textContent = product.description || '';
+
+    const featuresList = document.getElementById('modalFeatures');
+    featuresList.innerHTML = (product.features || [])
+        .map(f => `<li>${f}</li>`)
+        .join('');
+
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
-// Close product modal
 function closeProductModal() {
     const modal = document.getElementById('productModal');
     if (!modal) return;
-    
     modal.classList.remove('active');
     document.body.style.overflow = '';
 }
 
-// Contact us button in modal
 function contactUs() {
     closeProductModal();
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-        contactSection.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-    }
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// Close modal when clicking outside
-document.addEventListener('click', function(e) {
-    const modal = document.getElementById('productModal');
-    if (modal && e.target === modal) {
-        closeProductModal();
-    }
+/* Close modal on backdrop click or Escape */
+document.addEventListener('click', e => {
+    if (e.target.id === 'productModal') closeProductModal();
+});
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeProductModal();
 });
 
-// Close with Escape key
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        closeProductModal();
-    }
-});
-
-// Initialize
-document.addEventListener('DOMContentLoaded', function() {
-    loadProducts();
-    
-    // Add animation on scroll (optional)
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    // Observe product cards after they load
-    setTimeout(() => {
-        document.querySelectorAll('.product-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
-    }, 100);
-});
+/* ---------- Init ---------- */
+document.addEventListener('DOMContentLoaded', loadProducts);
