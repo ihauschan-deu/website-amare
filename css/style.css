@@ -1,4 +1,4 @@
-/* ========== RESET & BASE2 ========== */
+/* ========== RESET & BASE ========== */
 * {
     margin: 0;
     padding: 0;
@@ -216,10 +216,15 @@ img {
     padding: var(--section-gap) 0;
 }
 
+/*
+  .container already provides padding: 0 var(--pad-x) on sides.
+  We only add top/bottom here so cards align with content in hero/about.
+*/
 .products .container {
     background-color: var(--beige);
     border-radius: var(--radius);
-    padding: var(--pad-section) var(--pad-x);
+    padding-top: var(--pad-section);
+    padding-bottom: var(--pad-section);
     position: relative;
     overflow: visible;
 }
@@ -234,15 +239,18 @@ img {
     color: var(--brown);
     letter-spacing: 1.8px;
     padding: 20px 30px;
-    background: url('images/backgrounds/title-bg.png') center/cover;
+    background-color: var(--blue-grey);
     border-radius: 15px;
     display: inline-block;
     width: 300px;
 }
 
+/* The wrapper clips the grid scroll but reserves space for the arrow on the right */
 .product-grid-wrapper {
     position: relative;
     overflow: hidden;
+    /* Reserve 100px for the arrow button so it stays inside the beige box */
+    padding-right: 100px;
 }
 
 .product-grid {
@@ -258,15 +266,16 @@ img {
     display: none;
 }
 
+/* Arrow sits at the right edge of the wrapper, always visible */
 .scroll-arrow {
     position: absolute;
-    right: -100px;
-    top: 50%;
+    right: 10px;
+    top: 45%;
     transform: translateY(-50%);
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    background-color: var(--beige);
+    background-color: white;
     border: 3px solid var(--gold);
     cursor: pointer;
     display: flex;
@@ -274,11 +283,12 @@ img {
     justify-content: center;
     transition: all 0.3s;
     z-index: 10;
+    box-shadow: 0 4px 16px rgba(75, 46, 20, 0.15);
 }
 
 .scroll-arrow:hover {
-    background-color: #c8c5b6;
-    transform: translateY(-50%) scale(1.05);
+    background-color: var(--beige);
+    transform: translateY(-50%) scale(1.08);
 }
 
 /* ========== PRODUCT CARD ========== */
@@ -347,13 +357,16 @@ img {
 .contact {
     background-color: var(--brown);
     padding: var(--pad-section) var(--pad-x) 80px;
+    max-width: 100%;
 }
 
+/* Titles row spans full width inside the section's padding */
 .contact-titles {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: var(--pad-x);
+    max-width: 1400px;
+    margin: 0 auto var(--pad-x) auto;
 }
 
 .contact-titles h2 {
@@ -367,7 +380,7 @@ img {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 100px;
-    max-width: 1360px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
@@ -711,6 +724,9 @@ img {
     .product-card { min-width: 300px; max-width: 300px; }
     .product-name { font-size: 22px; min-height: auto; }
     .product-link { font-size: 18px; }
+    /* Hide arrow on mobile — user can swipe instead */
+    .scroll-arrow { display: none; }
+    .product-grid-wrapper { padding-right: 0; overflow: hidden; }
 
     .contact-titles  { flex-direction: column; gap: 10px; }
     .contact-titles h2 { font-size: 24px; }
