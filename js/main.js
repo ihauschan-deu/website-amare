@@ -74,6 +74,7 @@ async function loadProducts() {
 
     try {
         const res  = await fetch('products/products.json');
+        if (!res.ok) throw new Error('not ok');
         const data = await res.json();
 
         /* Featured → Новинки блок */
@@ -91,7 +92,7 @@ async function loadProducts() {
             card.innerHTML = `
                 <div class="product-image">
                     <img src="${product.image}" alt="${product.name}"
-                         onerror="this.parentElement.style.background='#d8d5c6'">
+                         onerror="this.parentElement.style.background='#c8c5d0'">
                 </div>
                 <h3 class="product-name">${product.name}</h3>
                 <span class="product-link">Узнать больше!</span>
@@ -102,7 +103,6 @@ async function loadProducts() {
 
         /* Animate on scroll */
         setTimeout(() => {
-            const cards = document.querySelectorAll('.product-card');
             const observer = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -112,7 +112,7 @@ async function loadProducts() {
                 });
             }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
 
-            cards.forEach(card => {
+            document.querySelectorAll('.product-card').forEach(card => {
                 card.style.opacity    = '0';
                 card.style.transform  = 'translateY(20px)';
                 card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
@@ -121,7 +121,13 @@ async function loadProducts() {
         }, 50);
 
     } catch (err) {
-        console.error('Ошибка загрузки продуктов:', err);
+        console.warn('products.json не загружен. Запустите сайт через локальный сервер (см. README).');
+        grid.innerHTML = `
+            <div style="padding:20px 0; color:#4b2e14; font-size:18px; opacity:0.55; font-family:Georgia,serif;">
+                ⚠️ Товары не загружены.<br>
+                <small>Запустите <b>start.bat</b> (Windows) или <b>start.sh</b> (Mac/Linux) и откройте сайт по появившейся ссылке.</small>
+            </div>
+        `;
     }
 }
 
