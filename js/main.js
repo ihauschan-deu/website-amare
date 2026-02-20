@@ -73,7 +73,7 @@ async function loadProducts() {
     if (!grid) return;
 
     try {
-        const res  = await fetch('products/products.json');
+        const res  = await fetch('./products/products.json');
         if (!res.ok) throw new Error('not ok');
         const data = await res.json();
 
