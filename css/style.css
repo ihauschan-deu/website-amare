@@ -224,8 +224,14 @@ img {
     background-color: var(--beige);
     border-radius: var(--radius);
     padding-top: var(--pad-section);
-    /* Bottom padding is larger to give space below the arrow */
     padding-bottom: 100px;
+    padding-left: var(--pad-x);
+    padding-right: var(--pad-x);
+    /* Боковые отступы от коричневого фона — как у других секций */
+    margin-left: var(--pad-x);
+    margin-right: var(--pad-x);
+    /* Убираем авто-центрирование контейнера чтобы margin работал */
+    max-width: calc(1400px - var(--pad-x) * 2);
     position: relative;
     overflow: hidden;
 }
