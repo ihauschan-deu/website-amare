@@ -364,30 +364,46 @@ img {
     padding: var(--pad-section) var(--pad-x) 80px;
 }
 
-/* Два заголовка по краям сверху */
-.contact-titles {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    max-width: 1400px;
-    margin: 0 auto var(--pad-x) auto;
+/*
+  Десктоп:
+  - Левая колонка (форма): 669px
+  - Правая колонка (контакты): 440px
+  - Правый край правой колонки = правое поле страницы (40px от края)
+  Итого ширина сетки = 669 + gap + 440
+  Выравниваем по правому полю через max-width + margin
+*/
+.contact-grid {
+    display: grid;
+    grid-template-columns: 669px 440px;
+    gap: 60px;
+    /* Правый край сетки совпадает с правым полем страницы */
+    max-width: calc(669px + 60px + 440px);
+    margin: 0 0 0 auto;
+    padding-right: var(--pad-x);
+    align-items: start;
 }
 
-.contact-titles h2 {
+/* Левая колонка: заголовок + форма */
+.contact-left {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Правая колонка: заголовок + контакты */
+.contact-right {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Заголовки над каждой колонкой */
+.contact-title {
     font-size: 36px;
     font-weight: 500;
     color: var(--blue-grey);
     letter-spacing: 0.5px;
-}
-
-/* Основная сетка: форма слева (862px), контакты справа */
-.contact-grid {
-    display: grid;
-    grid-template-columns: 862px 1fr;
-    gap: 60px;
-    max-width: 1400px;
-    margin: 0 auto;
-    align-items: start;
+    margin: 0;
 }
 
 /* Форма — бежевый блок */
@@ -442,7 +458,7 @@ img {
     resize: vertical;
 }
 
-/* Кнопка — по правому краю */
+/* Кнопка — по правому краю формы */
 .contact-form button[type="submit"] {
     background: transparent;
     border: 3px solid var(--gold);
@@ -464,14 +480,7 @@ img {
     transform: translateY(-2px);
 }
 
-/* Контактные данные справа */
-.contact-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding-top: 10px;
-}
-
+/* Контактные данные */
 .contact-details {
     display: flex;
     flex-direction: column;
@@ -696,8 +705,7 @@ img {
 
 /* ========== RESPONSIVE — WIDE TABLET (862px fixed col breaks) ========== */
 @media (max-width: 1100px) {
-    .contact-grid { grid-template-columns: 3fr 2fr; }
-}
+    .contact-grid { grid-template-columns: 3fr 2fr; }}
 
 /* ========== RESPONSIVE — TABLET ========== */
 @media (max-width: 1024px) {
@@ -712,10 +720,9 @@ img {
     .product-name { font-size: 28px; min-height: 100px; }
     .product-link { font-size: 20px; }
 
-    /* На планшете форма занимает 60%, контакты 40% */
-    .contact-grid { grid-template-columns: 3fr 2fr; gap: 40px; }
-    .contact-titles h2 { font-size: 28px; }
-    .contact-label, .contact-value { font-size: 24px; }
+    .contact-grid    { grid-template-columns: 3fr 2fr; gap: 40px; padding-right: var(--pad-x); }
+    .contact-title   { font-size: 28px; }
+    .contact-label, .contact-value { font-size: 22px; }
 
     .modal-content {
         flex-direction: column;
@@ -758,10 +765,8 @@ img {
     /* Hide arrow on mobile — user can swipe instead */
     .scroll-arrow { display: none; }
 
-    .contact-titles  { flex-direction: column; gap: 10px; }
-    .contact-titles h2 { font-size: 24px; }
-    /* На мобильном — одна колонка, форма на всю ширину */
-    .contact-grid    { grid-template-columns: 1fr; gap: 40px; }
+    .contact-grid    { grid-template-columns: 1fr; gap: 40px; padding-right: 0; margin: 0; }
+    .contact-title   { font-size: 24px; }
     .contact-form    { padding: var(--pad-x); }
     .contact-form input[type="email"] { font-size: 18px; }
     .contact-form textarea { font-size: 18px; min-height: 180px; }
