@@ -374,11 +374,9 @@ img {
 */
 .contact-grid {
     display: grid;
-    grid-template-columns: 669px 440px;
+    grid-template-columns: 1fr 440px;
     gap: 60px;
-    /* Правый край сетки совпадает с правым полем страницы */
-    max-width: calc(669px + 60px + 440px);
-    margin: 0 0 0 auto;
+    padding-left: var(--pad-x);
     padding-right: var(--pad-x);
     align-items: start;
 }
