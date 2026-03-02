@@ -225,12 +225,9 @@ img {
     border-radius: var(--radius);
     padding-top: var(--pad-section);
     padding-bottom: 100px;
-    padding-left: var(--pad-x);
-    padding-right: var(--pad-x);
-    /* Боковые отступы от коричневого фона — как у других секций */
+    /* margin даёт отступ бежевого блока от коричневого фона */
     margin-left: var(--pad-x);
     margin-right: var(--pad-x);
-    /* Убираем авто-центрирование контейнера чтобы margin работал */
     max-width: calc(1400px - var(--pad-x) * 2);
     position: relative;
     overflow: hidden;
@@ -376,8 +373,6 @@ img {
     display: grid;
     grid-template-columns: 1fr 440px;
     gap: 60px;
-    padding-left: var(--pad-x);
-    padding-right: var(--pad-x);
     align-items: start;
 }
 
@@ -718,7 +713,7 @@ img {
     .product-name { font-size: 28px; min-height: 100px; }
     .product-link { font-size: 20px; }
 
-    .contact-grid    { grid-template-columns: 3fr 2fr; gap: 40px; padding-right: var(--pad-x); }
+    .contact-grid    { grid-template-columns: 3fr 2fr; gap: 40px; }
     .contact-title   { font-size: 28px; }
     .contact-label, .contact-value { font-size: 22px; }
 
