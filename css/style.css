@@ -303,7 +303,6 @@ img {
 
 .product-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 30px rgba(75, 46, 20, 0.2);
 }
 
 .product-image {
@@ -745,15 +744,16 @@ img {
     .about-content h2 { font-size: 36px; }
     .about-content p  { font-size: 22px; }
 
-    /* Товары — 2 карточки в ряд на мобильном */
+    /* Товары — показываем 2 карточки, остальные скрыты за скроллом */
     .product-grid {
-        display: grid;
-        grid-template-columns: 165px 165px;
+        display: flex;
+        flex-direction: row;
         gap: 20px;
-        overflow-x: visible;
-        justify-content: center;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
         padding-bottom: 0;
     }
+    .product-grid-wrapper { overflow: hidden; }
     .product-card {
         min-width: 165px;
         max-width: 165px;
@@ -761,7 +761,8 @@ img {
         height: 228px;
         border-radius: 30px;
         padding: 12px;
-        flex-shrink: unset;
+        flex-shrink: 0;
+        scroll-snap-align: start;
     }
     .product-image {
         height: 120px;
@@ -771,7 +772,6 @@ img {
     .product-name { font-size: 14px; min-height: auto; margin-bottom: 6px; letter-spacing: 0.5px; }
     .product-link { font-size: 12px; }
     .scroll-arrow { display: none; }
-    .product-grid-wrapper { overflow: visible; }
 
     .contact-grid    { grid-template-columns: 1fr; gap: 40px; padding-right: 0; margin: 0; }
     .contact-title   { font-size: 24px; }
