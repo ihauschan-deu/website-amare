@@ -216,19 +216,12 @@ img {
     padding: var(--section-gap) 0;
 }
 
-/*
-  .container gives padding: 0 var(--pad-x) on sides (40px each).
-  Only override top/bottom padding here — horizontal comes from .container.
-*/
-.products .container {
+/* Одинаковый принцип с .about — .container даёт padding 40px,
+   бежевый блок (.products-content) внутри него */
+.products-content {
     background-color: var(--beige);
     border-radius: var(--radius);
-    padding-top: var(--pad-section);
-    padding-bottom: 100px;
-    /* margin даёт отступ бежевого блока от коричневого фона */
-    margin-left: var(--pad-x);
-    margin-right: var(--pad-x);
-    max-width: calc(1400px - var(--pad-x) * 2);
+    padding: var(--pad-section) var(--pad-x) 100px;
     position: relative;
     overflow: hidden;
 }
