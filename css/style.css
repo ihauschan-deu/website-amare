@@ -726,24 +726,20 @@ img {
         --section-gap: 20px;
         --pad-section: 40px;
     }
-
     .nav { gap: 40px; padding: 12px 30px; }
     .nav-link { font-size: 18px; }
-
     .hero-content { padding: var(--pad-x); }
     .hero-image   { height: 300px; }
     .brand-title  { font-size: 28px; letter-spacing: 1.5px; }
-
     .hero-bottom  { flex-direction: column; gap: 30px; }
     .hero-mission p { font-size: 24px; }
     .hero-features { width: 100%; min-width: unset; }
     .hero-features h2 { font-size: 24px; }
-    .feature-box  { width: 100%; height: 50px; }
-
+    .feature-box  { width: 100%; height: 44px; font-size: 13px; }  /* ← уменьшен шрифт и высота */
     .about-content { padding: var(--pad-section) var(--pad-x); }
     .about-content h2 { font-size: 36px; }
     .about-content p  { font-size: 22px; }
-
+    .section-title h2 { font-size: 20px; padding: 10px 20px; }  /* ← уменьшен «ТОВАРЫ» */
     /* Товары — показываем 2 карточки, остальные скрыты за скроллом */
     .product-grid {
         display: flex;
@@ -770,9 +766,8 @@ img {
         border-radius: 20px;
     }
     .product-name { font-size: 14px; min-height: auto; margin-bottom: 6px; letter-spacing: 0.5px; }
-    .product-link { font-size: 12px; }
+    .product-link { display: none; }  /* ← скрыта «Узнать больше!» */
     .scroll-arrow { display: none; }
-
     .contact-grid    { grid-template-columns: 1fr; gap: 40px; padding-right: 0; margin: 0; }
     .contact-title   { font-size: 24px; }
     .contact-form    { padding: var(--pad-x); }
@@ -781,14 +776,12 @@ img {
     .contact-form button[type="submit"] { font-size: 20px; padding: 14px 36px; align-self: flex-end; }
     .contact-label,
     .contact-value { font-size: 20px; }
-
     .modal-content { flex-direction: column; padding: 30px var(--pad-x); width: 95%; }
     .modal-image   { height: 280px; }
     .modal-title   { font-size: 28px; }
     .modal-description { font-size: 18px; }
     .modal-button  { padding: 15px 30px; font-size: 18px; }
 }
-
 @media (max-width: 480px) {
     .nav { gap: 20px; padding: 10px 20px; }
     .nav-link   { font-size: 16px; }
