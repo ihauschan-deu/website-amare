@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 html {
@@ -726,6 +727,12 @@ img {
         --section-gap: 20px;
         --pad-section: 40px;
     }
+    .products-content {
+    background-color: transparent;
+    border-radius: 0;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    border-top: 2px solid var(--beige);}
     .nav { gap: 40px; padding: 12px 30px; }
     .nav-link { font-size: 18px; }
     .hero-content { padding: var(--pad-x); }
