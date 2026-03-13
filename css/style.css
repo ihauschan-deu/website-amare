@@ -181,10 +181,7 @@ img {
 }
 
 
-/* ========== PRODUCTS SECTION ========== */
-.products {
-    background-color: var(--brown);
-    padding: var(--/* ========== ABOUT SECTION ========== */
+/* ========== ABOUT SECTION ========== */
 .about {
     background-color: var(--brown);
     padding: 0 0 var(--section-gap) 0;
@@ -240,7 +237,12 @@ img {
     color: var(--gold);
     font-size: 28px;
     line-height: 1.8;
-}section-gap) 0;
+}
+
+/* ========== PRODUCTS SECTION ========== */
+.products {
+    background-color: var(--brown);
+    padding: var(--section-gap) 0;
 }
 
 
