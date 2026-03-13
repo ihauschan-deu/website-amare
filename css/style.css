@@ -747,9 +747,8 @@ img {
     .about-content h2 { font-size: 36px; }
     .about-content p  { font-size: 22px; }
 
-    /* Секция товаров — без бежевого фона, карточки на коричневом */
     .products         { padding: 20px 0 40px 0; }
-    .products .container { padding: 0; }
+    .products .container { padding: 0 var(--pad-x); }
     .products-content {
         background-color: transparent;
         border-radius: 0;
