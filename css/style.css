@@ -768,8 +768,8 @@ img {
     /* About */
     .about-content    { padding: var(--pad-section) var(--pad-x); }
     .about-content h2 { font-size: 36px; }
-    .about-content p  { font-size: 22px; }
-    .about-content ul li { font-size: 20px; }
+    .about-content p  { font-size: 16px; }
+    .about-content ul li { font-size: 16px; }
 
     .products         { padding: 20px 0 40px 0; }
     .products .container { padding: 0 var(--pad-x); }
