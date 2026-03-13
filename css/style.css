@@ -367,6 +367,8 @@ img {
     display: grid;
     grid-template-columns: 1fr 440px;
     gap: 60px;
+    max-width: 1400px;
+    margin: 0 auto;
     align-items: start;
 }
 
