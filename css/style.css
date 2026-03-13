@@ -180,7 +180,11 @@ img {
     background-color: #8a95b5;
 }
 
-/* ========== ABOUT SECTION ========== */
+
+/* ========== PRODUCTS SECTION ========== */
+.products {
+    background-color: var(--brown);
+    padding: var(--/* ========== ABOUT SECTION ========== */
 .about {
     background-color: var(--brown);
     padding: 0 0 var(--section-gap) 0;
@@ -208,17 +212,38 @@ img {
     letter-spacing: 1.5px;
     line-height: 1.6;
     max-width: 900px;
-    margin: 0 auto;
+    margin: 0 auto 16px;
 }
 
-/* ========== PRODUCTS SECTION ========== */
-.products {
-    background-color: var(--brown);
-    padding: var(--section-gap) 0;
+.about-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto 16px;
+    max-width: 900px;
+    text-align: left;
 }
 
-/* Одинаковый принцип с .about — .container даёт padding 40px,
-   бежевый блок (.products-content) внутри него */
+.about-content ul li {
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--brown);
+    letter-spacing: 1.5px;
+    line-height: 1.6;
+    padding: 6px 0 6px 30px;
+    position: relative;
+}
+
+.about-content ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 28px;
+    line-height: 1.8;
+}section-gap) 0;
+}
+
+
 .products-content {
     background-color: var(--beige);
     border-radius: var(--radius);
@@ -243,7 +268,7 @@ img {
     display: inline-block;
 }
 
-/* Grid wrapper — no extra padding, cards go edge-to-edge within container padding */
+
 .product-grid-wrapper {
     position: relative;
 }
@@ -355,14 +380,7 @@ img {
     padding: var(--pad-section) var(--pad-x) 80px;
 }
 
-/*
-  Десктоп:
-  - Левая колонка (форма): 669px
-  - Правая колонка (контакты): 440px
-  - Правый край правой колонки = правое поле страницы (40px от края)
-  Итого ширина сетки = 669 + gap + 440
-  Выравниваем по правому полю через max-width + margin
-*/
+
 .contact-grid {
     display: grid;
     grid-template-columns: 1fr 440px;
