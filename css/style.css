@@ -211,6 +211,9 @@ img {
     max-width: 900px;
     margin: 0 auto 16px;
 }
+.about-content .text-left {
+    text-align: left;
+}
 
 .about-content ul {
     list-style: none;
