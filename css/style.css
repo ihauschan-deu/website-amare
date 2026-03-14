@@ -317,7 +317,8 @@ img {
     transition: background-color 0.3s;
     z-index: 10;
 }
-
+.scroll-arrow--right { right: var(--pad-x); }
+.scroll-arrow--left  { right: calc(var(--pad-x) + 72px + 16px); }
 .scroll-arrow:hover {
     background-color: var(--brown);
 }
