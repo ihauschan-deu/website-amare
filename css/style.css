@@ -762,17 +762,60 @@ img {
         --pad-section: 40px;
     }
 
-    /* Hero */
-    .nav          { gap: 40px; padding: 12px 30px; }
-    .nav-link     { font-size: 18px; }
-    .hero-content { padding: var(--pad-x); }
-    .hero-image   { height: 300px; }
-    .brand-title  { font-size: 28px; letter-spacing: 1.5px; }
-    .hero-bottom  { flex-direction: column; gap: 30px; }
-    .hero-mission p   { font-size: 24px; }
-    .hero-features    { width: 100%; min-width: unset; }
-    .hero-features h2 { font-size: 24px; }
-    .feature-box      { width: 100%; height: 44px; font-size: 13px; }
+    /* Hero — полная ширина без скруглений */
+    .hero { padding: 0; min-height: unset; }
+    .hero-content {
+        padding: 0;
+        border-radius: 0;
+        background-color: transparent;
+    }
+    .hero-image {
+        height: 280px;
+        border-radius: 0;
+        margin-bottom: 0;
+    }
+    .nav {
+        top: 20px;
+        left: 20px;
+        padding: 10px 20px;
+        gap: 24px;
+        border-radius: 30px;
+    }
+    .nav-link { font-size: 16px; }
+    .brand-title {
+        font-size: 32px;
+        bottom: 20px;
+        right: 20px;
+        color: var(--brown);
+    }
+
+    /* Миссия — бежевая секция на всю ширину без скруглений */
+    .hero-bottom { flex-direction: column; gap: 0; }
+    .hero-mission {
+        background-color: var(--beige);
+        width: 100%;
+        padding: 30px var(--pad-x);
+        min-width: unset;
+    }
+    .hero-mission p { font-size: 22px; }
+
+    /* Новинки — коричневый фон, заголовок по центру, кнопки с отступами */
+    .hero-features {
+        width: 100%;
+        min-width: unset;
+        background-color: transparent;
+        padding: 30px var(--pad-x);
+    }
+    .hero-features h2 { font-size: 24px; text-align: center; margin-bottom: 24px; color: var(--beige); }
+    .feature-box {
+        width: 100%;
+        max-width: 100%;
+        height: 56px;
+        font-size: 16px;
+        margin-bottom: 20px;
+        border-radius: var(--radius);
+        color: var(--brown);
+    }
 
     /* About */
     .about-content    { padding: var(--pad-section) var(--pad-x); }
