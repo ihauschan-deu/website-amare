@@ -1,3 +1,12 @@
+/* ========== FONTS ========== */
+@font-face {
+    font-family: 'Kyiv Type Serif';
+    src: url('../fonts/KyivTypeSerif-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* ========== RESET & BASE ========== */
 * {
     margin: 0;
@@ -771,7 +780,7 @@ img {
     .about-content p  { font-size: 16px; }
     .about-content ul li { font-size: 16px; }
     
-    .section-title    { margin-left: var(--pad-x); margin-bottom: 20px; }
+    .section-title    { margin-left: 0; margin-bottom: 20px; }
     .section-title h2 { font-size: 20px; padding: 10px 20px; }
     
     .products         { padding: 20px 0 40px 0; }
