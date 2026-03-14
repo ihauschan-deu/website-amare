@@ -794,7 +794,7 @@ img {
     .hero-mission {
         background-color: var(--beige);
         width: 100%;
-        padding: 30px var(--pad-x);
+        padding: 0px;
         min-width: unset;
     }
     .hero-mission p { font-size: 22px; }
