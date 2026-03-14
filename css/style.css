@@ -772,7 +772,7 @@ img {
     .hero-image {
         height: 280px;
         border-radius: 0;
-        margin-bottom: 0;
+        margin-bottom: 20px;
     }
     .nav {
         top: 20px;
