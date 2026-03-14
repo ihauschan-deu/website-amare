@@ -770,7 +770,9 @@ img {
     .about-content h2 { font-size: 36px; }
     .about-content p  { font-size: 16px; }
     .about-content ul li { font-size: 16px; }
-
+    
+    .section-title    { margin-left: var(--pad-x); margin-bottom: 20px; }
+    .section-title h2 { font-size: 20px; padding: 10px 20px; }
     .products         { padding: 20px 0 40px 0; }
     .products .container { padding: 0 var(--pad-x); }
     .products-content {
@@ -779,8 +781,6 @@ img {
         padding: 0;
         overflow: visible;
     }
-    .section-title    { margin-left: var(--pad-x); margin-bottom: 20px; }
-    .section-title h2 { font-size: 20px; padding: 10px 20px; }
 
     .product-grid-wrapper { overflow: hidden; }
     .product-grid {
@@ -808,7 +808,7 @@ img {
         margin-bottom: 10px;
         border-radius: 20px;
     }
-    .product-name { font-size: 14px; min-height: auto; margin-bottom: 6px; letter-spacing: 0.5px; }
+    .product-name { font-size: 16px; min-height: auto; margin-bottom: 6px; letter-spacing: 0.5px; }
     .product-link { display: none; }
     .scroll-arrow { display: none; }
 
@@ -816,17 +816,17 @@ img {
     .contact-grid   { grid-template-columns: 1fr; gap: 40px; padding-right: 0; margin: 0; }
     .contact-title  { font-size: 24px; }
     .contact-form   { padding: var(--pad-x); }
-    .contact-form input[type="email"]   { font-size: 18px; }
-    .contact-form textarea              { font-size: 18px; min-height: 180px; }
-    .contact-form button[type="submit"] { font-size: 20px; padding: 14px 36px; align-self: flex-end; }
+    .contact-form input[type="email"]   { font-size: 16px; }
+    .contact-form textarea              { font-size: 16px; min-height: 180px; }
+    .contact-form button[type="submit"] { font-size: 18px; padding: 14px 36px; align-self: flex-end; }
     .contact-label,
-    .contact-value  { font-size: 20px; }
+    .contact-value  { font-size: 16px; }
 
     /* Modal */
     .modal-content     { flex-direction: column; padding: 30px var(--pad-x); width: 95%; }
     .modal-image       { height: 280px; }
     .modal-title       { font-size: 28px; }
-    .modal-description { font-size: 18px; }
+    .modal-description { font-size: 16px; }
     .modal-button      { padding: 15px 30px; font-size: 18px; }
 }
 
