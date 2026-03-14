@@ -13,22 +13,42 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-/* ---------- Product scroll arrow ---------- */
-const scrollBtn  = document.getElementById('scrollRight');
-const productGrid = document.getElementById('productGrid');
+/* ---------- Product scroll arrows ---------- */
+function initScrollArrows() {
+    const scrollBtn     = document.getElementById('scrollRight');
+    const scrollBtnLeft = document.getElementById('scrollLeft');
+    const grid          = document.getElementById('productGrid');
 
-if (scrollBtn && productGrid) {
-    scrollBtn.addEventListener('click', () => {
-        const cardWidth  = 380;
-        const gap        = 40;
-        productGrid.scrollBy({ left: (cardWidth + gap) * 3, behavior: 'smooth' });
-    });
+    if (!grid) return;
 
-    productGrid.addEventListener('scroll', () => {
-        const atEnd = productGrid.scrollLeft >= productGrid.scrollWidth - productGrid.clientWidth - 10;
-        scrollBtn.style.opacity = atEnd ? '0.3' : '1';
-        scrollBtn.style.cursor  = atEnd ? 'default' : 'pointer';
-    });
+    function updateArrows() {
+        const atStart = grid.scrollLeft <= 10;
+        const atEnd   = grid.scrollLeft >= grid.scrollWidth - grid.clientWidth - 10;
+
+        if (scrollBtnLeft) {
+            scrollBtnLeft.style.opacity = atStart ? '0.3' : '1';
+            scrollBtnLeft.style.cursor  = atStart ? 'default' : 'pointer';
+        }
+        if (scrollBtn) {
+            scrollBtn.style.opacity = atEnd ? '0.3' : '1';
+            scrollBtn.style.cursor  = atEnd ? 'default' : 'pointer';
+        }
+    }
+
+    if (scrollBtn) {
+        scrollBtn.addEventListener('click', () => {
+            grid.scrollBy({ left: (380 + 40) * 3, behavior: 'smooth' });
+        });
+    }
+
+    if (scrollBtnLeft) {
+        scrollBtnLeft.addEventListener('click', () => {
+            grid.scrollBy({ left: -((380 + 40) * 3), behavior: 'smooth' });
+        });
+    }
+
+    grid.addEventListener('scroll', updateArrows);
+    updateArrows();
 }
 
 /* ---------- Contact form ---------- */
@@ -101,6 +121,9 @@ async function loadProducts() {
             grid.appendChild(card);
         });
 
+        /* Re-init arrows after cards loaded */
+        initScrollArrows();
+
         /* Animate on scroll */
         setTimeout(() => {
             const observer = new IntersectionObserver(entries => {
@@ -171,4 +194,7 @@ document.addEventListener('keydown', e => {
 });
 
 /* ---------- Init ---------- */
-document.addEventListener('DOMContentLoaded', loadProducts);
+document.addEventListener('DOMContentLoaded', () => {
+    loadProducts();
+    initScrollArrows();
+});
