@@ -304,7 +304,6 @@ img {
 .scroll-arrow {
     position: absolute;
     bottom: 24px;
-    right: var(--pad-x);
     width: 72px;
     height: 72px;
     border-radius: 50%;
@@ -317,8 +316,10 @@ img {
     transition: background-color 0.3s;
     z-index: 10;
 }
-.scroll-arrow-right { right: var(--pad-x); }
-.scroll-arrow-left  { right: calc(var(--pad-x) + 72px + 26px); }
+/* Правая стрелка */
+.scroll-arrow:not(.scroll-arrow-left) { right: var(--pad-x); }
+/* Левая стрелка */
+.scroll-arrow-left { right: calc(var(--pad-x) + 72px + 16px); }
 .scroll-arrow:hover {
     background-color: var(--brown);
 }
@@ -765,6 +766,7 @@ img {
 
     /* Hero — полная ширина без скруглений */
     .hero { padding: 0; min-height: unset; }
+    .hero .container { padding: 0; }
     .hero-content {
         padding: 0;
         border-radius: 0;
@@ -795,7 +797,7 @@ img {
     .hero-mission {
         background-color: var(--beige);
         width: 100%;
-        padding: 0px;
+        padding: 30px var(--pad-x);
         min-width: unset;
     }
     .hero-mission p { font-size: 22px; }
