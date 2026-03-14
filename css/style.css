@@ -767,12 +767,13 @@ img {
 
     /* About */
     .about-content    { padding: var(--pad-section) var(--pad-x); }
-    .about-content h2 { font-size: 36px; }
+    .about-content h2 { font-size: 20px; }
     .about-content p  { font-size: 16px; }
     .about-content ul li { font-size: 16px; }
     
     .section-title    { margin-left: var(--pad-x); margin-bottom: 20px; }
     .section-title h2 { font-size: 20px; padding: 10px 20px; }
+    
     .products         { padding: 20px 0 40px 0; }
     .products .container { padding: 0 var(--pad-x); }
     .products-content {
@@ -814,7 +815,7 @@ img {
 
     /* Contact */
     .contact-grid   { grid-template-columns: 1fr; gap: 40px; padding-right: 0; margin: 0; }
-    .contact-title  { font-size: 24px; }
+    .contact-title  { font-size: 20px; }
     .contact-form   { padding: var(--pad-x); }
     .contact-form input[type="email"]   { font-size: 16px; }
     .contact-form textarea              { font-size: 16px; min-height: 180px; }
@@ -825,7 +826,7 @@ img {
     /* Modal */
     .modal-content     { flex-direction: column; padding: 30px var(--pad-x); width: 95%; }
     .modal-image       { height: 280px; }
-    .modal-title       { font-size: 28px; }
+    .modal-title       { font-size: 20px; }
     .modal-description { font-size: 16px; }
     .modal-button      { padding: 15px 30px; font-size: 18px; }
 }
