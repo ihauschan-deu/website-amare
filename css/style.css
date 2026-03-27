@@ -258,6 +258,13 @@ img {
     line-height: 1.8;
 }
 
+.about-content p,
+.about-content ul li,
+.modal-description,
+.modal-details li,
+.contact-value {
+    font-family: 'Inter', sans-serif;
+}
 /* ========== PRODUCTS SECTION ========== */
 .products {
     background-color: var(--brown);
