@@ -47,7 +47,17 @@ function initScrollArrows() {
         });
     }
 
-    grid.addEventListener('scroll', updateArrows);
+    /* Disable hover animation while scrolling */
+    let scrollTimer;
+    grid.addEventListener('scroll', () => {
+        updateArrows();
+        grid.classList.add('is-scrolling');
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+            grid.classList.remove('is-scrolling');
+        }, 150);
+    });
+
     updateArrows();
 }
 
