@@ -3,401 +3,868 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Управление продуктами — Амаре Групп</title>
+    <title>Амаре Групп — Управление товарами</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400;500&display=swap');
+
         :root {
-            --brown:    #4b2e14;
-            --beige:    #d8d5c6;
-            --blue:     #a2adcb;
-            --gold:     #b39b7b;
-            --radius:   30px;
+            --brown:     #4b2e14;
+            --beige:     #d8d5c6;
+            --blue-grey: #a2adcb;
+            --gold:      #b39b7b;
+            --red:       #c0392b;
+            --green:     #27ae60;
+            --radius:    20px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Georgia', serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--brown);
             color: var(--brown);
-            padding: 40px 20px;
             min-height: 100vh;
+            padding: 40px 20px;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: var(--beige);
+        /* ===== LOGIN SCREEN ===== */
+        #loginScreen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 80px);
+        }
+
+        .login-box {
+            background: var(--beige);
             border-radius: var(--radius);
             padding: 50px 60px;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
         }
 
-        h1 {
+        .login-box h1 {
+            font-family: 'Playfair Display', serif;
             font-size: 32px;
-            font-weight: 400;
+            font-weight: 500;
             color: var(--brown);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
-        .subtitle {
+        .login-box p {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 36px;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
             font-size: 16px;
-            color: #666;
-            margin-bottom: 40px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: border-color 0.2s;
+            margin-bottom: 16px;
         }
 
-        /* ---- Info box ---- */
-        .info-box {
-            background: #fff8e1;
-            border-left: 4px solid var(--gold);
-            padding: 16px 20px;
+        .login-box input:focus { border-color: var(--brown); }
+
+        .login-box button {
+            width: 100%;
+            padding: 14px;
+            background: var(--brown);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .login-box button:hover { background: #3a2210; }
+
+        .login-error {
+            color: var(--red);
+            font-size: 14px;
+            margin-top: 12px;
+            display: none;
+        }
+
+        /* ===== MAIN PANEL ===== */
+        #adminPanel { display: none; max-width: 1100px; margin: 0 auto; }
+
+        .panel-header {
+            background: var(--beige);
+            border-radius: var(--radius);
+            padding: 28px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .panel-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 500;
+        }
+
+        .btn-logout {
+            background: transparent;
+            border: 2px solid var(--brown);
             border-radius: 10px;
+            padding: 8px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            color: var(--brown);
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+        }
+        .btn-logout:hover { background: var(--brown); color: white; }
+
+        /* ===== TOAST ===== */
+        #toast {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            padding: 14px 24px;
+            border-radius: 12px;
             font-size: 15px;
-            color: #6b5000;
-            margin-bottom: 40px;
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            color: white;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        #toast.show { opacity: 1; transform: translateY(0); }
+        #toast.success { background: var(--green); }
+        #toast.error   { background: var(--red); }
+
+        /* ===== TWO COLUMN LAYOUT ===== */
+        .layout {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 24px;
+            align-items: start;
         }
 
-        .info-box code {
-            background: rgba(0,0,0,0.08);
-            padding: 1px 6px;
-            border-radius: 4px;
-            font-family: monospace;
-        }
-
-        /* ---- Form ---- */
+        /* ===== CARD ===== */
         .card {
-            background: white;
-            border-radius: 20px;
-            padding: 35px 40px;
-            margin-bottom: 30px;
+            background: var(--beige);
+            border-radius: var(--radius);
+            padding: 32px;
         }
 
         .card h2 {
+            font-family: 'Playfair Display', serif;
             font-size: 22px;
             font-weight: 500;
-            color: var(--brown);
-            margin-bottom: 25px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid rgba(75,46,20,0.1);
         }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+        /* ===== FORM ===== */
+        .form-group { margin-bottom: 18px; }
 
         label {
             display: block;
-            font-size: 14px;
-            font-weight: bold;
+            font-size: 13px;
+            font-weight: 500;
             color: var(--brown);
             margin-bottom: 6px;
-            letter-spacing: 0.3px;
-        }
-
-        .hint {
-            font-size: 12px;
-            color: #888;
-            font-weight: normal;
-            margin-left: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         input[type="text"],
-        textarea {
+        input[type="number"],
+        textarea,
+        select {
             width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e0ddd0;
+            padding: 11px 14px;
+            border: 2px solid rgba(75,46,20,0.2);
             border-radius: 10px;
-            font-size: 16px;
-            font-family: 'Georgia', serif;
-            color: #333;
-            transition: border-color 0.3s;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            color: var(--brown);
+            background: white;
             outline: none;
+            transition: border-color 0.2s;
         }
 
-        input[type="text"]:focus,
-        textarea:focus {
-            border-color: var(--blue);
+        input:focus, textarea:focus, select:focus {
+            border-color: var(--brown);
         }
 
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
+        textarea { min-height: 90px; resize: vertical; }
 
+        .features-input {
+            font-size: 13px;
+            min-height: 80px;
+        }
         .features-hint {
             font-size: 12px;
-            color: #888;
+            color: #999;
             margin-top: 4px;
         }
 
-        .checkbox-row {
+        .toggle-row {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
-        .checkbox-row input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-            accent-color: var(--brown);
+        /* Toggle switch */
+        .toggle {
+            position: relative;
+            width: 46px;
+            height: 26px;
+            flex-shrink: 0;
         }
-
-        .checkbox-row label {
-            margin: 0;
-            font-weight: normal;
+        .toggle input { opacity: 0; width: 0; height: 0; }
+        .toggle-slider {
+            position: absolute;
+            inset: 0;
+            background: #ccc;
+            border-radius: 26px;
             cursor: pointer;
+            transition: background 0.3s;
         }
+        .toggle-slider::before {
+            content: '';
+            position: absolute;
+            width: 20px; height: 20px;
+            left: 3px; top: 3px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+        .toggle input:checked + .toggle-slider { background: var(--brown); }
+        .toggle input:checked + .toggle-slider::before { transform: translateX(20px); }
+        .toggle-label { font-size: 14px; color: var(--brown); }
 
         .btn-add {
-            background-color: var(--brown);
+            width: 100%;
+            padding: 14px;
+            background: var(--brown);
             color: white;
             border: none;
-            border-radius: var(--radius);
-            padding: 14px 40px;
-            font-size: 18px;
-            font-family: 'Georgia', serif;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .btn-add:hover { background-color: #5d3a1a; }
-
-        /* ---- Products list ---- */
-        .product-item {
-            background: #f8f7f3;
             border-radius: 12px;
-            padding: 16px 20px;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .product-info h3 {
             font-size: 16px;
+            font-family: 'Playfair Display', serif;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 8px;
+        }
+        .btn-add:hover { background: #3a2210; transform: translateY(-1px); }
+
+        /* ===== PRODUCT LIST ===== */
+        #productsList { display: flex; flex-direction: column; gap: 12px; }
+
+        .product-item {
+            background: white;
+            border-radius: 14px;
+            padding: 16px 18px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: box-shadow 0.2s;
+            cursor: grab;
+        }
+        .product-item:hover { box-shadow: 0 4px 16px rgba(75,46,20,0.12); }
+        .product-item.dragging { opacity: 0.4; cursor: grabbing; }
+
+        .drag-handle {
+            color: #bbb;
+            font-size: 18px;
+            cursor: grab;
+            user-select: none;
+            flex-shrink: 0;
+        }
+
+        .item-thumb {
+            width: 52px;
+            height: 52px;
+            border-radius: 10px;
+            background: var(--beige);
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .item-info { flex: 1; min-width: 0; }
+        .item-name {
+            font-size: 15px;
+            font-weight: 500;
             color: var(--brown);
-            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .item-meta {
+            font-size: 12px;
+            color: #999;
+            margin-top: 2px;
         }
 
-        .product-info p {
-            font-size: 13px;
-            color: #888;
-        }
-
-        .badge-featured {
-            background: var(--blue);
+        .badge-new {
+            background: var(--blue-grey);
             color: white;
             font-size: 11px;
-            padding: 3px 10px;
+            padding: 2px 8px;
             border-radius: 20px;
-            margin-left: 8px;
+            flex-shrink: 0;
         }
 
-        .btn-delete {
-            background-color: #d9534f;
-            color: white;
+        .item-actions { display: flex; gap: 8px; flex-shrink: 0; }
+
+        .btn-edit, .btn-delete {
+            padding: 6px 14px;
             border: none;
-            border-radius: 20px;
-            padding: 8px 18px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            white-space: nowrap;
-        }
-
-        .btn-delete:hover { background-color: #c9302c; }
-
-        /* ---- JSON output ---- */
-        .json-block {
-            background: #1e1e1e;
-            border-radius: 15px;
-            padding: 25px;
-            margin-top: 10px;
-        }
-
-        .json-block h3 {
-            color: white;
-            font-size: 15px;
-            margin-bottom: 15px;
-        }
-
-        pre {
-            color: #7ec8e3;
-            font-family: 'Courier New', monospace;
+            border-radius: 8px;
             font-size: 13px;
-            max-height: 350px;
-            overflow-y: auto;
-            white-space: pre-wrap;
-            word-break: break-word;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-edit   { background: var(--beige); color: var(--brown); }
+        .btn-edit:hover   { background: var(--gold); color: white; }
+        .btn-delete { background: #fde8e8; color: var(--red); }
+        .btn-delete:hover { background: var(--red); color: white; }
+
+        /* ===== SAVE BAR ===== */
+        .save-bar {
+            background: var(--beige);
+            border-radius: var(--radius);
+            padding: 20px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 24px;
         }
 
-        .btn-copy {
-            background: var(--gold);
+        .save-bar p { font-size: 14px; color: #888; }
+        .save-bar strong { color: var(--brown); }
+
+        .btn-save {
+            padding: 14px 48px;
+            background: var(--brown);
             color: white;
             border: none;
-            border-radius: 20px;
-            padding: 10px 24px;
-            font-size: 15px;
+            border-radius: 12px;
+            font-size: 17px;
+            font-family: 'Playfair Display', serif;
             cursor: pointer;
-            margin-top: 15px;
-            transition: background-color 0.3s;
+            transition: all 0.2s;
+        }
+        .btn-save:hover { background: #3a2210; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(75,46,20,0.3); }
+        .btn-save:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        /* ===== EDIT MODAL ===== */
+        #editModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(75,46,20,0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        #editModal.open { display: flex; }
+
+        .edit-modal-box {
+            background: var(--beige);
+            border-radius: var(--radius);
+            padding: 40px;
+            width: 100%;
+            max-width: 560px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: popIn 0.25s ease;
+        }
+        @keyframes popIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to   { transform: scale(1);   opacity: 1; }
         }
 
-        .btn-copy:hover { background-color: #9e8465; }
+        .edit-modal-box h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            margin-bottom: 24px;
+        }
 
-        .empty-msg { color: #999; font-style: italic; }
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .btn-cancel {
+            flex: 1;
+            padding: 12px;
+            background: white;
+            border: 2px solid rgba(75,46,20,0.2);
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            color: var(--brown);
+            transition: all 0.2s;
+        }
+        .btn-cancel:hover { border-color: var(--brown); }
+
+        .btn-save-edit {
+            flex: 2;
+            padding: 12px;
+            background: var(--brown);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-save-edit:hover { background: #3a2210; }
+
+        /* ===== EMPTY STATE ===== */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #aaa;
+            font-size: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .layout { grid-template-columns: 1fr; }
+            .panel-header { flex-direction: column; gap: 16px; align-items: flex-start; }
+        }
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>⚙️ Управление продуктами</h1>
-    <p class="subtitle">Амаре Групп — панель администратора</p>
 
-    <div class="info-box">
-        <strong>Как добавить продукт:</strong><br>
-        1. Загрузите изображение продукта в папку <code>images/products/</code><br>
-        2. Заполните форму ниже и нажмите «Добавить»<br>
-        3. Скопируйте JSON и сохраните его в файл <code>products.json</code><br>
-        4. Обновите страницу сайта — продукт появится автоматически
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+    <div class="login-box">
+        <h1>Амаре Групп</h1>
+        <p>Панель управления товарами</p>
+        <input type="password" id="passwordInput" placeholder="Введите пароль" autocomplete="current-password">
+        <button onclick="login()">Войти</button>
+        <p class="login-error" id="loginError">Неверный пароль</p>
+    </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel">
+
+    <div class="panel-header">
+        <h1>🛠 Управление товарами</h1>
+        <button class="btn-logout" onclick="logout()">Выйти</button>
     </div>
 
-    <!-- Form -->
-    <div class="card">
-        <h2>➕ Добавить новый продукт</h2>
-        <form id="addForm">
+    <div class="layout">
+
+        <!-- LEFT: Product list -->
+        <div class="card">
+            <h2>📦 Товары <span id="countBadge" style="font-size:14px;color:#999;font-family:Inter,sans-serif;font-weight:400;"></span></h2>
+            <div id="productsList"></div>
+        </div>
+
+        <!-- RIGHT: Add form -->
+        <div class="card">
+            <h2>➕ Добавить товар</h2>
+
             <div class="form-group">
-                <label>Название продукта <span class="hint">*обязательно</span></label>
-                <input type="text" id="fName" placeholder="Глазурь «Святая»" required>
+                <label>Название *</label>
+                <input type="text" id="newName" placeholder="Глазурь на эквиваленте «Святая»">
             </div>
 
             <div class="form-group">
                 <label>Описание</label>
-                <textarea id="fDesc" placeholder="Высококачественная глазурь для кондитерских изделий..."></textarea>
+                <textarea id="newDesc" placeholder="Описание продукта..."></textarea>
             </div>
 
             <div class="form-group">
-                <label>Путь к изображению <span class="hint">*обязательно</span></label>
-                <input type="text" id="fImage" placeholder="images/products/product6.jpg" required>
+                <label>Путь к изображению *</label>
+                <input type="text" id="newImage" placeholder="images/product1.jpg">
+                <p class="features-hint">Загрузите фото через менеджер файлов хостинга в папку images/</p>
             </div>
 
             <div class="form-group">
                 <label>Характеристики</label>
-                <textarea id="fFeatures" placeholder="Натуральные ингредиенты&#10;Высокое качество&#10;Быстро застывает"
-                          rows="4"></textarea>
+                <textarea id="newFeatures" class="features-input" placeholder="Высокое качество&#10;Натуральные ингредиенты&#10;Быстро застывает"></textarea>
                 <p class="features-hint">Каждая характеристика — с новой строки</p>
             </div>
 
             <div class="form-group">
-                <div class="checkbox-row">
-                    <input type="checkbox" id="fFeatured">
-                    <label for="fFeatured">Показывать в блоке «Новинки» на главной</label>
+                <div class="toggle-row">
+                    <label class="toggle">
+                        <input type="checkbox" id="newFeatured">
+                        <span class="toggle-slider"></span>
+                    </label>
+                    <span class="toggle-label">Показать в блоке «Новинки»</span>
                 </div>
             </div>
 
-            <button type="submit" class="btn-add">Добавить продукт</button>
-        </form>
+            <button class="btn-add" onclick="addProduct()">Добавить товар</button>
+        </div>
     </div>
 
-    <!-- Products list -->
-    <div class="card">
-        <h2>📦 Текущие продукты</h2>
-        <div id="productsList"><p class="empty-msg">Загрузка...</p></div>
+    <!-- SAVE BAR -->
+    <div class="save-bar">
+        <p>Несохранённые изменения: <strong id="changesCount">0</strong></p>
+        <button class="btn-save" id="saveBtn" onclick="saveProducts()">💾 Сохранить на сайте</button>
     </div>
 
-    <!-- JSON output -->
-    <div class="json-block">
-        <h3>📄 JSON для сохранения в products.json:</h3>
-        <pre id="jsonOut"></pre>
-        <button class="btn-copy" onclick="copyJSON()">📋 Скопировать JSON</button>
+</div>
+
+<!-- EDIT MODAL -->
+<div id="editModal">
+    <div class="edit-modal-box">
+        <h2>✏️ Редактировать товар</h2>
+
+        <input type="hidden" id="editId">
+
+        <div class="form-group">
+            <label>Название *</label>
+            <input type="text" id="editName">
+        </div>
+        <div class="form-group">
+            <label>Описание</label>
+            <textarea id="editDesc"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Путь к изображению</label>
+            <input type="text" id="editImage">
+        </div>
+        <div class="form-group">
+            <label>Характеристики (каждая с новой строки)</label>
+            <textarea id="editFeatures" class="features-input"></textarea>
+        </div>
+        <div class="form-group">
+            <div class="toggle-row">
+                <label class="toggle">
+                    <input type="checkbox" id="editFeatured">
+                    <span class="toggle-slider"></span>
+                </label>
+                <span class="toggle-label">Показать в «Новинках»</span>
+            </div>
+        </div>
+
+        <div class="modal-actions">
+            <button class="btn-cancel" onclick="closeEdit()">Отмена</button>
+            <button class="btn-save-edit" onclick="saveEdit()">Сохранить изменения</button>
+        </div>
     </div>
 </div>
 
 <script>
-let products = [];
+// ============================================================
+//  CONFIG
+// ============================================================
+const SAVE_URL = 'save_products.php';
 
-/* Load existing */
-async function init() {
-    try {
-        const res  = await fetch('products/products.json');
-        const data = await res.json();
-        products = data.products || [];
-    } catch {
-        products = [];
-    }
-    render();
-    updateJSON();
-}
+// ============================================================
+//  STATE
+// ============================================================
+let password   = '';
+let products   = [];
+let changes    = 0;
+let editIndex  = -1;
+let dragSrc    = null;
 
-/* Render list */
-function render() {
-    const el = document.getElementById('productsList');
-    if (!products.length) {
-        el.innerHTML = '<p class="empty-msg">Нет продуктов. Добавьте первый!</p>';
-        return;
-    }
-    el.innerHTML = products.map((p, i) => `
-        <div class="product-item">
-            <div class="product-info">
-                <h3>
-                    ${p.name}
-                    ${p.featured ? '<span class="badge-featured">Новинка</span>' : ''}
-                </h3>
-                <p>ID: ${p.id} &nbsp;|&nbsp; Изображение: ${p.image}</p>
-            </div>
-            <button class="btn-delete" onclick="deleteProduct(${i})">🗑 Удалить</button>
-        </div>
-    `).join('');
-}
+// ============================================================
+//  AUTH
+// ============================================================
+function login() {
+    const val = document.getElementById('passwordInput').value.trim();
+    if (!val) return;
 
-/* Delete */
-function deleteProduct(i) {
-    if (confirm('Удалить этот продукт?')) {
-        products.splice(i, 1);
-        render();
-        updateJSON();
-    }
-}
+    // Проверяем пароль через попытку сохранить (сервер ответит 403 если неверный)
+    password = val;
 
-/* Add */
-document.getElementById('addForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const featuresRaw = document.getElementById('fFeatures').value.trim();
-    const features    = featuresRaw
-        ? featuresRaw.split('\n').map(s => s.trim()).filter(Boolean)
-        : [];
-
-    const maxId = products.length ? Math.max(...products.map(p => p.id)) : 0;
-
-    products.push({
-        id:          maxId + 1,
-        name:        document.getElementById('fName').value.trim(),
-        description: document.getElementById('fDesc').value.trim(),
-        image:       document.getElementById('fImage').value.trim(),
-        featured:    document.getElementById('fFeatured').checked,
-        features
+    // Сначала загружаем продукты
+    loadProducts().then(ok => {
+        if (ok) {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('adminPanel').style.display  = 'block';
+        } else {
+            password = '';
+            document.getElementById('loginError').style.display = 'block';
+        }
     });
+}
 
-    render();
-    updateJSON();
-    this.reset();
-    alert('✅ Продукт добавлен! Скопируйте JSON ниже и сохраните в products.json');
+function logout() {
+    password  = '';
+    products  = [];
+    changes   = 0;
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('adminPanel').style.display  = 'none';
+    document.getElementById('passwordInput').value = '';
+    document.getElementById('loginError').style.display = 'none';
+}
+
+document.getElementById('passwordInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') login();
 });
 
-/* JSON output */
-function updateJSON() {
-    document.getElementById('jsonOut').textContent =
-        JSON.stringify({ products }, null, 2);
+// ============================================================
+//  LOAD PRODUCTS
+// ============================================================
+async function loadProducts() {
+    try {
+        const res  = await fetch('products/products.json?_=' + Date.now());
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        products   = data.products || [];
+
+        // Проверяем пароль через тестовое сохранение того же списка
+        const check = await fetch(SAVE_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password, products })
+        });
+        if (check.status === 403) return false;
+
+        changes = 0;
+        renderList();
+        return true;
+    } catch {
+        // Если products.json ещё не существует — начинаем с пустого списка
+        // но всё равно проверяем пароль
+        try {
+            const check = await fetch(SAVE_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password, products: [] })
+            });
+            if (check.status === 403) return false;
+            products = [];
+            changes  = 0;
+            renderList();
+            return true;
+        } catch {
+            return false;
+        }
+    }
 }
 
-/* Copy */
-function copyJSON() {
-    const text = document.getElementById('jsonOut').textContent;
-    navigator.clipboard.writeText(text).then(() => {
-        alert('✅ JSON скопирован!\nВставьте его в файл products.json');
+// ============================================================
+//  RENDER LIST
+// ============================================================
+function renderList() {
+    const container = document.getElementById('productsList');
+    document.getElementById('countBadge').textContent = '(' + products.length + ')';
+    document.getElementById('changesCount').textContent = changes;
+    document.getElementById('saveBtn').disabled = changes === 0;
+
+    if (products.length === 0) {
+        container.innerHTML = '<div class="empty-state">Товаров пока нет.<br>Добавьте первый товар →</div>';
+        return;
+    }
+
+    container.innerHTML = '';
+    products.forEach((p, i) => {
+        const item = document.createElement('div');
+        item.className    = 'product-item';
+        item.draggable    = true;
+        item.dataset.index = i;
+
+        item.innerHTML = `
+            <span class="drag-handle" title="Перетащить">⠿</span>
+            <img class="item-thumb"
+                 src="${p.image}"
+                 alt="${p.name}"
+                 onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2252%22 height=%2252%22><rect fill=%22%23d8d5c6%22 width=%2252%22 height=%2252%22/></svg>'">
+            <div class="item-info">
+                <div class="item-name">${p.name}</div>
+                <div class="item-meta">${p.image}</div>
+            </div>
+            ${p.featured ? '<span class="badge-new">Новинка</span>' : ''}
+            <div class="item-actions">
+                <button class="btn-edit"   onclick="openEdit(${i})">✏️</button>
+                <button class="btn-delete" onclick="deleteProduct(${i})">🗑</button>
+            </div>
+        `;
+
+        // Drag & drop
+        item.addEventListener('dragstart', () => { dragSrc = i; item.classList.add('dragging'); });
+        item.addEventListener('dragend',   () => item.classList.remove('dragging'));
+        item.addEventListener('dragover',  e => e.preventDefault());
+        item.addEventListener('drop', () => {
+            if (dragSrc === null || dragSrc === i) return;
+            const moved = products.splice(dragSrc, 1)[0];
+            products.splice(i, 0, moved);
+            dragSrc = null;
+            markChanged();
+            renderList();
+        });
+
+        container.appendChild(item);
     });
 }
 
-init();
+// ============================================================
+//  ADD PRODUCT
+// ============================================================
+function addProduct() {
+    const name  = document.getElementById('newName').value.trim();
+    const image = document.getElementById('newImage').value.trim();
+
+    if (!name)  { showToast('Введите название товара', 'error'); return; }
+    if (!image) { showToast('Введите путь к изображению', 'error'); return; }
+
+    const featuresRaw = document.getElementById('newFeatures').value;
+    const features    = featuresRaw.split('\n').map(f => f.trim()).filter(Boolean);
+
+    const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
+
+    products.push({
+        id:          newId,
+        name,
+        description: document.getElementById('newDesc').value.trim(),
+        image,
+        featured:    document.getElementById('newFeatured').checked,
+        link:        '#',
+        features,
+    });
+
+    // Clear form
+    document.getElementById('newName').value     = '';
+    document.getElementById('newDesc').value     = '';
+    document.getElementById('newImage').value    = '';
+    document.getElementById('newFeatures').value = '';
+    document.getElementById('newFeatured').checked = false;
+
+    markChanged();
+    renderList();
+    showToast('Товар добавлен! Не забудьте сохранить.', 'success');
+}
+
+// ============================================================
+//  DELETE
+// ============================================================
+function deleteProduct(i) {
+    if (!confirm('Удалить товар «' + products[i].name + '»?')) return;
+    products.splice(i, 1);
+    markChanged();
+    renderList();
+}
+
+// ============================================================
+//  EDIT MODAL
+// ============================================================
+function openEdit(i) {
+    editIndex = i;
+    const p   = products[i];
+
+    document.getElementById('editId').value       = p.id;
+    document.getElementById('editName').value     = p.name;
+    document.getElementById('editDesc').value     = p.description || '';
+    document.getElementById('editImage').value    = p.image;
+    document.getElementById('editFeatures').value = (p.features || []).join('\n');
+    document.getElementById('editFeatured').checked = p.featured;
+
+    document.getElementById('editModal').classList.add('open');
+}
+
+function closeEdit() {
+    document.getElementById('editModal').classList.remove('open');
+    editIndex = -1;
+}
+
+function saveEdit() {
+    if (editIndex < 0) return;
+
+    const name  = document.getElementById('editName').value.trim();
+    const image = document.getElementById('editImage').value.trim();
+    if (!name)  { showToast('Введите название', 'error'); return; }
+    if (!image) { showToast('Введите путь к изображению', 'error'); return; }
+
+    const featuresRaw = document.getElementById('editFeatures').value;
+    const features    = featuresRaw.split('\n').map(f => f.trim()).filter(Boolean);
+
+    products[editIndex] = {
+        ...products[editIndex],
+        name,
+        description: document.getElementById('editDesc').value.trim(),
+        image,
+        featured:    document.getElementById('editFeatured').checked,
+        features,
+    };
+
+    closeEdit();
+    markChanged();
+    renderList();
+    showToast('Изменения сохранены в памяти. Нажмите «Сохранить на сайте».', 'success');
+}
+
+// Close modal on backdrop
+document.getElementById('editModal').addEventListener('click', function(e) {
+    if (e.target === this) closeEdit();
+});
+
+// ============================================================
+//  SAVE TO SERVER
+// ============================================================
+async function saveProducts() {
+    const btn = document.getElementById('saveBtn');
+    btn.disabled   = true;
+    btn.textContent = '⏳ Сохраняем...';
+
+    try {
+        const res = await fetch(SAVE_URL, {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify({ password, products }),
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.ok) {
+            changes = 0;
+            renderList();
+            showToast('✅ Сохранено! Сайт обновлён (' + data.saved + ' товаров)', 'success');
+        } else if (res.status === 403) {
+            showToast('Неверный пароль', 'error');
+        } else {
+            showToast('Ошибка: ' + (data.error || 'неизвестная ошибка'), 'error');
+        }
+    } catch {
+        showToast('Нет соединения с сервером', 'error');
+    } finally {
+        btn.textContent = '💾 Сохранить на сайте';
+        btn.disabled    = changes === 0;
+    }
+}
+
+// ============================================================
+//  HELPERS
+// ============================================================
+function markChanged() {
+    changes++;
+    document.getElementById('changesCount').textContent = changes;
+    document.getElementById('saveBtn').disabled = false;
+}
+
+function showToast(msg, type = 'success') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className   = 'show ' + type;
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => { t.className = ''; }, 3500);
+}
 </script>
 </body>
 </html>
