@@ -362,7 +362,7 @@ img {
 }
 
 .product-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-10px) !important;
 }
 
 .product-grid.is-scrolling .product-card:hover {
