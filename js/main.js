@@ -47,17 +47,7 @@ function initScrollArrows() {
         });
     }
 
-    /* Disable hover animation while scrolling */
-    let scrollTimer;
-    grid.addEventListener('scroll', () => {
-        updateArrows();
-        grid.classList.add('is-scrolling');
-        clearTimeout(scrollTimer);
-        scrollTimer = setTimeout(() => {
-            grid.classList.remove('is-scrolling');
-        }, 150);
-    });
-
+    grid.addEventListener('scroll', updateArrows);
     updateArrows();
 }
 
@@ -70,31 +60,58 @@ if (contactForm) {
         const email   = this.email.value.trim();
         const message = this.message.value.trim();
 
-        if (!email)   { alert('Пожалуйста, введите ваш email');    return; }
-        if (!message) { alert('Пожалуйста, введите сообщение');    return; }
+        if (!email)   { showFormStatus('Пожалуйста, введите ваш email', 'error');   return; }
+        if (!message) { showFormStatus('Пожалуйста, введите сообщение', 'error');   return; }
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            alert('Пожалуйста, введите корректный email');
+            showFormStatus('Пожалуйста, введите корректный email', 'error');
             return;
         }
 
+        const btn = this.querySelector('button[type="submit"]');
+        const originalText = btn.textContent;
+        btn.disabled    = true;
+        btn.textContent = 'Отправляем...';
+
         try {
-            const res = await fetch('/api/contact', {
-                method: 'POST',
+            const res = await fetch('send_mail.php', {
+                method:  'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, message })
+                body:    JSON.stringify({ email, message })
             });
-            if (res.ok) {
-                alert('Сообщение отправлено! Мы свяжемся с вами по email: ' + email);
+
+            const data = await res.json().catch(() => ({}));
+
+            if (res.ok && data.ok) {
+                showFormStatus('Сообщение отправлено! Мы свяжемся с вами в ближайшее время.', 'success');
                 this.reset();
             } else {
-                throw new Error();
+                showFormStatus('Ошибка отправки. Пожалуйста, напишите нам напрямую на orders@amaregrupp.ru', 'error');
             }
         } catch {
-            /* Demo mode — backend not connected */
-            alert('Спасибо за сообщение! Мы свяжемся с вами по email: ' + email);
-            this.reset();
+            showFormStatus('Нет соединения с сервером. Напишите нам на orders@amaregrupp.ru', 'error');
+        } finally {
+            btn.disabled    = false;
+            btn.textContent = originalText;
         }
     });
+}
+
+function showFormStatus(msg, type) {
+    let el = document.getElementById('formStatus');
+    if (!el) {
+        el = document.createElement('p');
+        el.id = 'formStatus';
+        el.style.cssText = 'margin-top:12px; font-size:15px; font-family:Inter,sans-serif; transition:opacity 0.3s;';
+        const form = document.getElementById('contactForm');
+        if (form) form.appendChild(el);
+    }
+    el.textContent = msg;
+    el.style.color  = type === 'success' ? '#27ae60' : '#c0392b';
+    el.style.opacity = '1';
+    clearTimeout(el._timer);
+    if (type === 'success') {
+        el._timer = setTimeout(() => { el.style.opacity = '0'; }, 5000);
+    }
 }
 
 /* ---------- Load products from products.json ---------- */
