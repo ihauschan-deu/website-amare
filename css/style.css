@@ -364,7 +364,6 @@ img {
 
 .product-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 16px 40px rgba(75, 46, 20, 0.25);
 }
 
 .product-image {
