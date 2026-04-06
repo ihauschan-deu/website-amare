@@ -806,7 +806,7 @@ img {
         gap: 24px;
         border-radius: 30px;
     }
-    .nav-link { font-size: 16px; }
+    .nav-link { font-size: 14px; }
     .brand-title {
         font-size: 32px;
         bottom: 20px;
@@ -910,7 +910,7 @@ img {
 
 @media (max-width: 480px) {
     .nav { gap: 20px; padding: 10px 20px; }
-    .nav-link   { font-size: 16px; }
+    .nav-link   { font-size: 14px; }
     .brand-title { font-size: 22px; }
     .hero-mission p { font-size: 18px; }
 }
