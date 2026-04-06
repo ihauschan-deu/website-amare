@@ -306,16 +306,13 @@ img {
     gap: var(--pad-x);
     overflow-x: auto;
     scroll-behavior: smooth;
-    padding-bottom: 16px;
-    padding-top: 12px;
+    padding-bottom: 8px;
     scrollbar-width: none;
 }
 
 .product-grid::-webkit-scrollbar {
     display: none;
 }
-
-
 
 /* Arrow — bottom-right corner of the beige container, as in the design */
 .scroll-arrow {
@@ -353,20 +350,15 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: transform 0.25s ease;
+    transition: transform 0.3s;
     min-width: 380px;
     max-width: 380px;
     flex-shrink: 0;
     cursor: pointer;
-    will-change: transform;
 }
 
 .product-card:hover {
-    transform: translateY(-10px) !important;
-}
-
-.product-grid.is-scrolling .product-card:hover {
-    transform: none;
+    transform: translateY(-8px);
 }
 
 .product-image {
@@ -761,6 +753,8 @@ img {
     .brand-title  { font-size: 36px; }
     .hero-mission p { font-size: 28px; }
     .hero-features h2 { font-size: 28px; }
+    .hero-bottom { justify-content: center; }
+    .hero-features { display: flex; flex-direction: column; align-items: center; }
     .feature-box  { width: 300px; height: 56px; }
     .product-name { font-size: 28px; min-height: 100px; }
     .product-link { font-size: 20px; }
@@ -798,6 +792,9 @@ img {
         height: 280px;
         border-radius: 0;
         margin-bottom: 20px;
+    }
+    .hero-image img {
+        object-position: 65% center;
     }
     .nav {
         top: 20px;
